@@ -2,19 +2,15 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <!-- iOS Viewport setup to prevent double-tap zoom & feel like native app -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>《全方位 多元親屬稱謂 暨 基因近似度 計算機》 | LGBTQIA+ Kinship & Genetic Similarity Calculator</title>
     
-    <!-- iOS Web App Meta Tags (PWA) -->
+    <!-- iOS PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="親屬計算機">
-    <meta name="theme-color" content="#051b11">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'><rect width='512' height='512' rx='100' fill='%230c2e1f'/><circle cx='256' cy='256' r='200' fill='%23154d34'/><text x='256' y='240' font-size='110' text-anchor='middle' dominant-baseline='middle'>🌈</text><text x='256' y='350' font-size='90' text-anchor='middle' dominant-baseline='middle'>🧮</text></svg>">
     
-    <!-- Apple Touch Icon (App icon on Home Screen) -->
-    <link rel="apple-touch-icon" href="https://fav.farm/🌈">
-
-    <title>LGBTQIA+ 多元親屬稱謂與基因相似度計算機 | Inclusive Kinship & Cousin Calculator</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,22 +33,14 @@
         }
     </script>
     <!-- FontAwesome Font for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-fontawesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Disables iOS text selection for app-like feeling */
-        body {
-            -webkit-user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        /* 螢光綠霓虹燈效果 */
         .neon-glow {
             box-shadow: 0 0 10px rgba(57, 255, 20, 0.4), 0 0 20px rgba(57, 255, 20, 0.2);
         }
         .neon-text {
             text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
         }
-        /* 自訂滾動條 */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -69,25 +57,29 @@
         }
     </style>
 </head>
-<body class="bg-brand-darkest text-gray-100 min-h-screen flex flex-col font-sans selection:bg-brand-neon selection:text-brand-darkest pb-safe pt-safe">
+<body class="bg-brand-darkest text-gray-100 min-h-screen flex flex-col font-sans selection:bg-brand-neon selection:text-brand-darkest pb-6">
 
     <!-- Header 頂部欄與語系切換 -->
-    <header class="bg-brand-dark border-b border-brand-medium/50 px-4 py-3 sticky top-0 z-50 shadow-md">
-        <div class="max-w-md mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl">🌈</span>
-                <div>
-                    <h1 class="font-bold text-lg leading-tight text-white flex items-center gap-1.5">
-                        <span id="app-title">多元親屬稱謂計算機</span>
-                    </h1>
-                    <p class="text-xs text-brand-neon font-mono">Kinship & Genetic Similarity Calculator</p>
-                </div>
+    <header class="bg-brand-dark border-b border-brand-medium/50 px-2.5 py-2.5 sticky top-0 z-50 shadow-md">
+        <div class="max-w-md mx-auto">
+            <!-- 第 1 行：彩虹圖標與中文標題（加大字級，單行完整顯示） -->
+            <div class="flex items-center space-x-1.5 w-full">
+                <span class="text-lg shrink-0">🌈</span>
+                <h1 class="font-bold text-[13px] min-[360px]:text-[14.5px] min-[390px]:text-[16px] sm:text-lg text-white whitespace-nowrap tracking-tight">
+                    <span id="app-title">《全方位 多元親屬稱謂 暨 基因近似度 計算機》</span>
+                </h1>
             </div>
-            <!-- 語言切換按鈕 -->
-            <button id="lang-toggle-btn" class="bg-brand-medium hover:bg-brand-light text-brand-neon border border-brand-neon/40 text-xs px-3 py-1.5 rounded-full transition font-semibold flex items-center gap-1">
-                <i class="fa-solid font-xs fa-globe"></i>
-                <span id="lang-btn-text">English</span>
-            </button>
+            <!-- 第 2 行：英文標題（加大字級，單行完整顯示） -->
+            <div class="mt-1 pl-6 w-full">
+                <p class="text-[10.5px] min-[360px]:text-[11.5px] min-[390px]:text-[12.5px] sm:text-sm text-brand-neon font-mono font-medium whitespace-nowrap tracking-tighter sm:tracking-tight">LGBTQIA+ Kinship & Genetic Similarity Calculator</p>
+            </div>
+            <!-- 第 3 行：語系切換按鈕置於英文標題下方 -->
+            <div class="flex justify-end mt-1.5">
+                <button id="lang-toggle-btn" class="bg-brand-medium hover:bg-brand-light text-brand-neon border border-brand-neon/40 text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full transition font-semibold flex items-center gap-1 shrink-0">
+                    <i class="fa-solid fa-globe text-[11px]"></i>
+                    <span id="lang-btn-text">English</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -138,7 +130,7 @@
             <div class="mb-2">
                 <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-0.5 flex justify-between">
                     <span id="lbl-input-chain">關係鏈 / Chain:</span>
-                    <span id="chain-count" class="text-brand-neon font-mono">0 個稱謂</span>
+                    <span id="chain-count" class="text-brand-neon font-mono">1 個稱謂</span>
                 </div>
                 <div id="chain-display" class="text-base font-bold text-brand-neon bg-brand-darkest/60 p-2 rounded-lg border border-brand-medium/40 min-h-[42px] flex items-center flex-wrap gap-1 font-mono">
                     <span class="bg-brand-medium/60 text-white px-2 py-0.5 rounded text-xs">我</span>
@@ -173,24 +165,24 @@
                         </div>
                     </div>
 
-                    <!-- 基因相似度估算分析 -->
+                    <!-- 世代與基因相似度估算 -->
                     <div class="border-t border-brand-medium/50 pt-1.5">
                         <div class="flex justify-between items-center">
                             <span class="text-[10px] text-gray-400 uppercase font-semibold" id="lbl-dna-similarity">基因相似度估算 / Genetic Similarity:</span>
-                            <span id="res-dna-percentage" class="text-xs font-mono font-bold text-brand-neon">12.5%</span>
+                            <span id="res-dna-percentage" class="text-xs font-mono font-bold text-brand-neon">0%</span>
                         </div>
                         <div class="w-full bg-brand-medium/40 h-1.5 rounded-full mt-1 overflow-hidden">
-                            <div id="res-dna-bar" class="bg-brand-neon h-full transition-all duration-500" style="width: 12.5%;"></div>
+                            <div id="res-dna-bar" class="bg-brand-neon h-full transition-all duration-500" style="width: 0%;"></div>
                         </div>
                     </div>
 
                     <!-- LGBTQIA+ 多元/包容性稱謂觀點解釋 -->
                     <div class="bg-brand-medium/30 p-2 rounded border border-brand-light/30 text-xs text-gray-300">
                         <span class="text-brand-neon font-bold flex items-center gap-1 mb-0.5">
-                            <span>🌈</span> <span id="lbl-explanation-title">包容性與同性婚姻稱謂觀點：</span>
+                            <span>🌈</span> <span id="lbl-explanation-title">多元親屬與長鏈解構說明：</span>
                         </span>
                         <p id="res-explanation" class="text-[11px] leading-relaxed text-gray-200">
-                            在同性婚姻中，丈夫的妹夫可直接比照傳統配偶親屬稱謂，或稱呼為「妹夫」。
+                            在同性婚姻中，丈夫的妹妹可稱為小姑或妹子；其兒子稱呼你為舅丈/舅公。
                         </p>
                     </div>
                 </div>
@@ -199,39 +191,35 @@
 
         <!-- 計算機按鈕面板 -->
         <section class="grid grid-cols-4 gap-1.5 mb-3">
-            <!-- 第一排按鈕 -->
+            <!-- 第一排 -->
             <button type="button" data-rel="FATHER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">父</button>
             <button type="button" data-rel="MOTHER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">母</button>
             <button type="button" data-rel="HUSBAND" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">夫</button>
             <button type="button" data-rel="WIFE" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">妻</button>
 
-            <!-- 第二排按鈕 -->
+            <!-- 第二排 -->
             <button type="button" data-rel="ELDER_BRO" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">兄</button>
             <button type="button" data-rel="YOUNGER_BRO" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">弟</button>
             <button type="button" data-rel="ELDER_SIS" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">姐</button>
             <button type="button" data-rel="YOUNGER_SIS" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">妹</button>
 
-            <!-- 第三排按鈕 -->
-            <button type="button" data-rel="AUNT_UNCLE" class="rel-btn bg-brand-medium/90 hover:bg-brand-light text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95">伯/叔/姑/舅/姨</button>
-            <button type="button" data-rel="COUSIN" class="rel-btn bg-brand-medium/90 hover:bg-brand-light text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95">堂/表親</button>
-            <button type="button" data-rel="NIECE_NEPHEW" class="rel-btn bg-brand-medium/90 hover:bg-brand-light text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95">姪/甥</button>
-            <button type="button" data-rel="PARTNER" class="rel-btn bg-brand-light hover:bg-brand-accent text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95 border border-brand-neon/40">伴侶 Partner</button>
-
-            <!-- 第四排按鈕 -->
+            <!-- 第三排 -->
             <button type="button" data-rel="SON" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">子</button>
             <button type="button" data-rel="DAUGHTER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">女</button>
+            <button type="button" data-rel="PARTNER" class="rel-btn bg-brand-light hover:bg-brand-accent text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95 col-span-2 border border-brand-neon/40">伴侶 Partner</button>
+
+            <!-- 第四排：控制按鈕 (AC, Delete, 計算) -->
             <button type="button" id="btn-ac" class="bg-red-900/80 hover:bg-red-800 text-red-200 font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">AC</button>
             <button type="button" id="btn-del" class="bg-yellow-900/80 hover:bg-yellow-800 text-yellow-200 font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">刪除</button>
-
-            <!-- 第五排：計算按鈕 -->
-            <button type="button" id="btn-calc" class="bg-brand-neon hover:bg-brand-neonHover text-brand-darkest font-extrabold py-3 rounded-xl text-base shadow neon-glow transition active:scale-95 col-span-4 flex items-center justify-center gap-1 mt-1">
+            <button type="button" id="btn-calc" class="bg-brand-neon hover:bg-brand-neonHover text-brand-darkest font-extrabold py-2.5 rounded-xl text-sm shadow neon-glow transition active:scale-95 col-span-2 flex items-center justify-center gap-1">
                 <span>＝</span>
-                <span id="btn-calc-text">計算稱謂與基因相似度</span>
+                <span id="btn-calc-text">計算稱謂</span>
             </button>
         </section>
 
         <!-- 延伸閱讀與創作者資訊 Footer -->
         <footer class="bg-brand-dark rounded-xl p-3 border border-brand-medium/60 text-center text-xs space-y-2">
+            <!-- 文章延伸閱讀按鈕 -->
             <div>
                 <a href="https://matters.town/a/pezdlqf8e7a9/history" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-brand-medium hover:bg-brand-light text-brand-neon px-3 py-1.5 rounded-lg border border-brand-neon/30 transition text-xs font-medium">
                     <span>📖</span>
@@ -240,6 +228,7 @@
                 </a>
             </div>
 
+            <!-- 創作者 IG 標記 -->
             <div class="text-gray-400 text-[11px] pt-1 border-t border-brand-medium/40 flex items-center justify-center gap-1">
                 <span>Designed & Created by</span>
                 <a href="https://instagram.com/2QT2BSTR8" target="_blank" rel="noopener noreferrer" class="text-brand-neon hover:underline font-bold flex items-center gap-0.5">
@@ -252,7 +241,7 @@
 
     </main>
 
-    <!-- JavaScript 邏輯引擎 -->
+    <!-- JavaScript 核心高階親屬遞迴演算法引擎 -->
     <script>
         const state = {
             lang: 'zh',
@@ -263,7 +252,7 @@
 
         const i18n = {
             zh: {
-                appTitle: "多元親屬稱謂計算機",
+                appTitle: "《全方位 多元親屬稱謂 暨 基因近似度 計算機》",
                 langBtnText: "English",
                 myGender: "我的性別 / My Gender:",
                 genderM: "男 (Male)",
@@ -278,13 +267,13 @@
                 lblCallTarget: "我應該稱呼對方為 / You call them:",
                 lblTargetCallMe: "對方應該稱呼我為 / They call you:",
                 lblDnaSimilarity: "基因相似度估算 / Genetic Similarity:",
-                lblExplanationTitle: "包容性與親屬結構解析：",
-                btnCalcText: "計算稱謂與基因相似度",
+                lblExplanationTitle: "多元親屬與長鏈解構說明：",
+                btnCalcText: "計算稱謂",
                 lblArticleLink: "閱讀創作者關於同性稱謂的文章",
                 self: "我"
             },
             en: {
-                appTitle: "Inclusive Kinship Calculator",
+                appTitle: "LGBTQIA+ Kinship & Genetic Similarity Calculator",
                 langBtnText: "繁體中文",
                 myGender: "My Gender:",
                 genderM: "Male",
@@ -300,7 +289,7 @@
                 lblTargetCallMe: "They call you:",
                 lblDnaSimilarity: "Genetic Similarity:",
                 lblExplanationTitle: "Inclusive & Kinship Perspective:",
-                btnCalcText: "Calculate Kinship & DNA %",
+                btnCalcText: "Calculate",
                 lblArticleLink: "Read Author's Article on Same-Sex Kinship",
                 self: "Me"
             }
@@ -310,76 +299,221 @@
             zh: {
                 FATHER: '父', MOTHER: '母', HUSBAND: '夫', WIFE: '妻',
                 ELDER_BRO: '兄', YOUNGER_BRO: '弟', ELDER_SIS: '姐', YOUNGER_SIS: '妹',
-                SON: '子', DAUGHTER: '女', PARTNER: '伴侶',
-                AUNT_UNCLE: '伯叔姑舅姨', COUSIN: '堂表親', NIECE_NEPHEW: '姪/甥'
+                SON: '子', DAUGHTER: '女', PARTNER: '伴侶'
             },
             en: {
                 FATHER: 'Father', MOTHER: 'Mother', HUSBAND: 'Husband', WIFE: 'Wife',
                 ELDER_BRO: 'Elder Bro', YOUNGER_BRO: 'Younger Bro', ELDER_SIS: 'Elder Sis', YOUNGER_SIS: 'Younger Sis',
-                SON: 'Son', DAUGHTER: 'Daughter', PARTNER: 'Partner',
-                AUNT_UNCLE: 'Aunt/Uncle', COUSIN: 'Cousin', NIECE_NEPHEW: 'Niece/Nephew'
+                SON: 'Son', DAUGHTER: 'Daughter', PARTNER: 'Partner'
             }
         };
 
-        const kinshipDatabase = [
-            // 兒女的同性配偶
-            { chain: ['DAUGHTER', 'WIFE'], callZh: '女媳', callEn: 'Daughter-in-law', reciprocalZh: '公公/婆婆/岳父/岳母', reciprocalEn: 'Parent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '女兒的妻子稱為「女媳」。', explanationEn: 'Daughter\'s wife is called 女媳.' },
-            { chain: ['SON', 'HUSBAND'], callZh: '子婿', callEn: 'Son-in-law', reciprocalZh: '公公/婆婆/岳父/岳母', reciprocalEn: 'Parent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '兒子的丈夫稱為「子婿」。', explanationEn: 'Son\'s husband is called 子婿.' },
+        // 親屬網絡推導引擎（Kinship Graph Reduction Engine）
+        function solveExtendedKinship(userGender, userStatus, rawChain) {
+            if (!rawChain || rawChain.length === 0) return null;
 
-            // 孫子女的同性配偶
-            { chain: ['SON', 'DAUGHTER', 'WIFE'], callZh: '孫女媳', callEn: 'Granddaughter\'s Wife', reciprocalZh: '祖父/祖母', reciprocalEn: 'Grandparent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '孫女的妻子稱為「孫女媳」。', explanationEn: 'Granddaughter\'s wife is called 孫女媳.' },
-            { chain: ['DAUGHTER', 'DAUGHTER', 'WIFE'], callZh: '外孫女媳 / 孫女媳', callEn: 'Granddaughter\'s Wife', reciprocalZh: '外祖父/外祖母', reciprocalEn: 'Grandparent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '外孫女的妻子稱為「外孫女媳」。', explanationEn: 'Granddaughter\'s wife is called 外孫女媳.' },
-            { chain: ['SON', 'SON', 'HUSBAND'], callZh: '孫子婿', callEn: 'Grandson\'s Husband', reciprocalZh: '祖父/祖母', reciprocalEn: 'Grandparent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '孫子的丈夫稱為「孫子婿」。', explanationEn: 'Grandson\'s husband is called 孫子婿.' },
-            { chain: ['DAUGHTER', 'SON', 'HUSBAND'], callZh: '外孫子婿 / 孫子婿', callEn: 'Grandson\'s Husband', reciprocalZh: '外祖父/外祖母', reciprocalEn: 'Grandparent-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '外孫子的丈夫稱為「外孫子婿」。', explanationEn: 'Grandson\'s husband is called 外孫子婿.' },
+            let chain = [...rawChain];
+            let genDelta = 0; // 世代累積 (父/母 +1, 子/女 -1)
+            let isMarriageLinked = false; // 是否經過婚姻連結
+            let lastGender = null; // 當前節點性別 ('M', 'F')
 
-            // 兄弟姐妹的同性配偶
-            { chain: ['ELDER_SIS', 'WIFE'], callZh: '姐嫂', callEn: 'Elder Sister\'s Wife', reciprocalZh: '妹夫/姑子/小叔', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姐姐的妻子稱為「姐嫂」。', explanationEn: 'Elder sister\'s wife is called 姐嫂.' },
-            { chain: ['ELDER_BRO', 'HUSBAND'], callZh: '兄夫', callEn: 'Elder Brother\'s Husband', reciprocalZh: '弟媳/妹夫/弟', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '哥哥的丈夫稱為「兄夫」。', explanationEn: 'Elder brother\'s husband is called 兄夫.' },
-            { chain: ['YOUNGER_SIS', 'WIFE'], callZh: '妹媳', callEn: 'Younger Sister\'s Wife', reciprocalZh: '大舅/姐夫/姐', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '妹妹的妻子稱為「妹媳」。', explanationEn: 'Younger sister\'s wife is called 妹媳.' },
-            { chain: ['YOUNGER_BRO', 'HUSBAND'], callZh: '弟婿', callEn: 'Younger Brother\'s Husband', reciprocalZh: '大哥/姐夫/兄', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '弟弟的丈夫稱為「弟婿」。', explanationEn: 'Younger brother\'s husband is called 弟婿.' },
+            // 性別標示 Mapping
+            const nodeGenderMap = {
+                FATHER: 'M', MOTHER: 'F', HUSBAND: 'M', WIFE: 'F',
+                ELDER_BRO: 'M', YOUNGER_BRO: 'M', ELDER_SIS: 'F', YOUNGER_SIS: 'F',
+                SON: 'M', DAUGHTER: 'F', PARTNER: 'NB'
+            };
 
-            // 兄弟姐妹之兒女的同性配偶
-            { chain: ['ELDER_SIS', 'DAUGHTER', 'WIFE'], callZh: '姨甥女媳 / 甥女媳', callEn: 'Niece\'s Wife', reciprocalZh: '姨媽/舅舅', reciprocalEn: 'Aunt/Uncle', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姊妹之女兒的妻子稱為「姨甥女媳」。', explanationEn: 'Sister\'s daughter\'s wife is called 姨甥女媳.' },
-            { chain: ['YOUNGER_SIS', 'DAUGHTER', 'WIFE'], callZh: '姨甥女媳 / 甥女媳', callEn: 'Niece\'s Wife', reciprocalZh: '姨媽/舅舅', reciprocalEn: 'Aunt/Uncle', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '妹之女兒的妻子稱為「姨甥女媳」。', explanationEn: 'Sister\'s daughter\'s wife is called 姨甥女媳.' },
-            { chain: ['ELDER_SIS', 'SON', 'HUSBAND'], callZh: '姨甥子婿 / 甥子婿', callEn: 'Nephew\'s Husband', reciprocalZh: '姨媽/舅舅', reciprocalEn: 'Aunt/Uncle', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姊妹之兒子的丈夫稱為「姨甥子婿」。', explanationEn: 'Sister\'s son\'s husband is called 姨甥子婿.' },
-            { chain: ['YOUNGER_SIS', 'SON', 'HUSBAND'], callZh: '姨甥子婿 / 甥子婿', callEn: 'Nephew\'s Husband', reciprocalZh: '姨媽/舅舅', reciprocalEn: 'Aunt/Uncle', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '妹之兒子的丈夫稱為「姨甥子婿」。', explanationEn: 'Sister\'s son\'s husband is called 姨甥子婿.' },
-            { chain: ['ELDER_BRO', 'DAUGHTER', 'WIFE'], callZh: '姪女媳', callEn: 'Niece\'s Wife', reciprocalZh: '伯父/叔父/姑姑', reciprocalEn: 'Uncle/Aunt', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '哥哥之女兒的妻子稱為「姪女媳」。', explanationEn: 'Brother\'s daughter\'s wife is called 姪女媳.' },
-            { chain: ['YOUNGER_BRO', 'DAUGHTER', 'WIFE'], callZh: '姪女媳', callEn: 'Niece\'s Wife', reciprocalZh: '伯父/叔父/姑姑', reciprocalEn: 'Uncle/Aunt', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '弟弟之女兒的妻子稱為「姪女媳」。', explanationEn: 'Brother\'s daughter\'s wife is called 姪女媳.' },
-            { chain: ['ELDER_BRO', 'SON', 'HUSBAND'], callZh: '姪子婿', callEn: 'Nephew\'s Husband', reciprocalZh: '伯父/叔父/姑姑', reciprocalEn: 'Uncle/Aunt', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '哥哥之兒子的丈夫稱為「姪子婿」。', explanationEn: 'Brother\'s son\'s husband is called 姪子婿.' },
-            { chain: ['YOUNGER_BRO', 'SON', 'HUSBAND'], callZh: '姪子婿', callEn: 'Nephew\'s Husband', reciprocalZh: '伯父/叔父/姑姑', reciprocalEn: 'Uncle/Aunt', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '弟弟之兒子的丈夫稱為「姪子婿」。', explanationEn: 'Brother\'s son\'s husband is called 姪子婿.' },
+            // 1. 簡化連續逆向關係 (如 父+母 -> 父的妻, 子+女...)
+            let reducedChain = [];
+            for (let i = 0; i < chain.length; i++) {
+                let curr = chain[i];
+                let next = chain[i + 1];
 
-            // 父母之兄弟姐妹的同性配偶
-            { chain: ['MOTHER', 'ELDER_SIS', 'WIFE'], callZh: '姨妗', callEn: 'Mother\'s Sister\'s Wife', reciprocalZh: '外甥/外甥女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '阿姨的妻子稱為「姨妗」。', explanationEn: 'Mother\'s sister\'s wife is called 姨妗.' },
-            { chain: ['MOTHER', 'YOUNGER_SIS', 'WIFE'], callZh: '姨妗', callEn: 'Mother\'s Sister\'s Wife', reciprocalZh: '外甥/外甥女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '阿姨的妻子稱為「姨妗」。', explanationEn: 'Mother\'s sister\'s wife is called 姨妗.' },
-            { chain: ['MOTHER', 'ELDER_BRO', 'HUSBAND'], callZh: '舅丈', callEn: 'Mother\'s Brother\'s Husband', reciprocalZh: '外甥/外甥女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '舅舅的丈夫稱為「舅丈」。', explanationEn: 'Mother\'s brother\'s husband is called 舅丈.' },
-            { chain: ['MOTHER', 'YOUNGER_BRO', 'HUSBAND'], callZh: '舅丈', callEn: 'Mother\'s Brother\'s Husband', reciprocalZh: '外甥/外甥女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '舅舅的丈夫稱為「舅丈」。', explanationEn: 'Mother\'s brother\'s husband is called 舅丈.' },
-            { chain: ['FATHER', 'ELDER_SIS', 'WIFE'], callZh: '姑姆', callEn: 'Father\'s Sister\'s Wife', reciprocalZh: '內姪/內姪女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姑姑（父姐）的妻子稱為「姑姆」。', explanationEn: 'Father\'s elder sister\'s wife is called 姑姆.' },
-            { chain: ['FATHER', 'YOUNGER_SIS', 'WIFE'], callZh: '姑嬸', callEn: 'Father\'s Sister\'s Wife', reciprocalZh: '內姪/內姪女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姑姑（父妹）的妻子稱為「姑嬸」。', explanationEn: 'Father\'s younger sister\'s wife is called 姑嬸.' },
-            { chain: ['FATHER', 'ELDER_BRO', 'HUSBAND'], callZh: '伯丈', callEn: 'Father\'s Brother\'s Husband', reciprocalZh: '姪/姪女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '伯父的丈夫稱為「伯丈」。', explanationEn: 'Father\'s elder brother\'s husband is called 伯丈.' },
-            { chain: ['FATHER', 'YOUNGER_BRO', 'HUSBAND'], callZh: '叔丈', callEn: 'Father\'s Brother\'s Husband', reciprocalZh: '姪/姪女', reciprocalEn: 'Niece/Nephew', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '叔叔的丈夫稱為「叔丈」。', explanationEn: 'Father\'s younger brother\'s husband is called 叔丈.' },
+                // 特殊自我抵銷邏輯
+                if ((curr === 'HUSBAND' && next === 'WIFE') || (curr === 'WIFE' && next === 'HUSBAND')) {
+                    i++; // 跳過配偶之配偶 (歸於原點)
+                    continue;
+                }
+                reducedChain.push(curr);
+            }
+            if (reducedChain.length === 0) {
+                return {
+                    callZh: "自己 / 配偶", callEn: "Self / Spouse",
+                    recipZh: "自己 / 配偶", recipEn: "Self / Spouse",
+                    dna: "100%", dnaBar: 100,
+                    expZh: "經過關係鏈互相抵銷後，回歸至您本人或您的配偶。",
+                    expEn: "The kinship chain resolves back to self or your spouse."
+                };
+            }
 
-            // 祖父母之兄弟姐妹的同性配偶
-            { chain: ['MOTHER', 'MOTHER', 'ELDER_SIS', 'WIFE'], callZh: '姨妗', callEn: 'Grand Aunt\'s Wife', reciprocalZh: '外孫姪', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姨婆的妻子稱為「姨妗」。', explanationEn: 'Mother\'s aunt\'s wife is called 姨妗.' },
-            { chain: ['MOTHER', 'MOTHER', 'ELDER_BRO', 'HUSBAND'], callZh: '舅丈公', callEn: 'Grand Uncle\'s Husband', reciprocalZh: '外孫姪', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '舅公的丈夫稱為「舅丈公」。', explanationEn: 'Grand uncle\'s husband is called 舅丈公.' },
-            { chain: ['FATHER', 'FATHER', 'ELDER_SIS', 'WIFE'], callZh: '姑姆婆', callEn: 'Grand Aunt\'s Wife', reciprocalZh: '姪孫', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姑婆（祖父姐）的妻子稱為「姑姆婆」。', explanationEn: 'Father\'s father\'s sister\'s wife is called 姑姆婆.' },
-            { chain: ['FATHER', 'FATHER', 'YOUNGER_SIS', 'WIFE'], callZh: '姑嬸婆', callEn: 'Grand Aunt\'s Wife', reciprocalZh: '姪孫', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姑婆（祖父妹）的妻子稱為「姑嬸婆」。', explanationEn: 'Father\'s father\'s sister\'s wife is called 姑嬸婆.' },
-            { chain: ['FATHER', 'FATHER', 'ELDER_BRO', 'HUSBAND'], callZh: '伯丈公', callEn: 'Grand Uncle\'s Husband', reciprocalZh: '姪孫', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '伯公的丈夫稱為「伯丈公」。', explanationEn: 'Grand uncle\'s husband is called 伯丈公.' },
-            { chain: ['FATHER', 'FATHER', 'YOUNGER_BRO', 'HUSBAND'], callZh: '叔丈公', callEn: 'Grand Uncle\'s Husband', reciprocalZh: '姪孫', reciprocalEn: 'Grand Nephew/Niece', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '叔公的丈夫稱為「叔丈公」。', explanationEn: 'Grand uncle\'s husband is called 叔丈公.' },
+            // 2. 統計世代與婚姻標籤
+            reducedChain.forEach(node => {
+                if (['FATHER', 'MOTHER'].includes(node)) genDelta += 1;
+                if (['SON', 'DAUGHTER'].includes(node)) genDelta -= 1;
+                if (['HUSBAND', 'WIFE', 'PARTNER'].includes(node)) isMarriageLinked = true;
+                lastGender = nodeGenderMap[node] || 'M';
+            });
 
-            // 配偶之兄弟姐妹的同性配偶
-            { chain: ['WIFE', 'ELDER_SIS', 'WIFE'], callZh: '大姨嫂', callEn: 'Wife\'s Sister\'s Wife', reciprocalZh: '妹夫/妹婦', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '大姨（妻姐）的妻子稱為「大姨嫂」。', explanationEn: 'Wife\'s elder sister\'s wife is called 大姨嫂.' },
-            { chain: ['WIFE', 'YOUNGER_SIS', 'WIFE'], callZh: '姨妹婦', callEn: 'Wife\'s Sister\'s Wife', reciprocalZh: '姐夫/姐嫂', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姨妹（妻妹）的妻子稱為「姨妹婦」。', explanationEn: 'Wife\'s younger sister\'s wife is called 姨妹婦.' },
-            { chain: ['WIFE', 'ELDER_BRO', 'HUSBAND'], callZh: '大舅夫', callEn: 'Wife\'s Brother\'s Husband', reciprocalZh: '妹夫', reciprocalEn: 'Brother-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '大舅（妻兄）的丈夫稱為「大舅夫」。', explanationEn: 'Wife\'s elder brother\'s husband is called 大舅夫.' },
-            { chain: ['WIFE', 'YOUNGER_BRO', 'HUSBAND'], callZh: '舅弟夫', callEn: 'Wife\'s Brother\'s Husband', reciprocalZh: '姐夫', reciprocalEn: 'Brother-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '舅弟（妻弟）的丈夫稱為「舅弟夫」。', explanationEn: 'Wife\'s younger brother\'s husband is called 舅弟夫.' },
-            { chain: ['HUSBAND', 'ELDER_SIS', 'WIFE'], callZh: '姑奶嫂', callEn: 'Husband\'s Sister\'s Wife', reciprocalZh: '弟媳/妹夫', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '姑奶（夫姐）的妻子稱為「姑奶嫂」。', explanationEn: 'Husband\'s elder sister\'s wife is called 姑奶嫂.' },
-            { chain: ['HUSBAND', 'YOUNGER_SIS', 'WIFE'], callZh: '小姑嬸', callEn: 'Husband\'s Sister\'s Wife', reciprocalZh: '嫂嫂/大兄夫', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '小姑（夫妹）的妻子稱為「小姑嬸」。', explanationEn: 'Husband\'s younger sister\'s wife is called 小姑嬸.' },
-            { chain: ['HUSBAND', 'ELDER_BRO', 'HUSBAND'], callZh: '大伯爺', callEn: 'Husband\'s Brother\'s Husband', reciprocalZh: '弟婿/弟媳', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '大伯（夫兄）的丈夫稱為「大伯爺」。', explanationEn: 'Husband\'s elder brother\'s husband is called 大伯爺.' },
-            { chain: ['HUSBAND', 'YOUNGER_BRO', 'HUSBAND'], callZh: '小叔爺', callEn: 'Husband\'s Brother\'s Husband', reciprocalZh: '兄夫/嫂嫂', reciprocalEn: 'Sibling-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '小叔（夫弟）的丈夫稱為「小叔爺」。', explanationEn: 'Husband\'s younger brother\'s husband is called 小叔爺.' },
+            const chainStr = reducedChain.join('->');
+            const targetGender = lastGender;
 
-            // 情境 A：我 -> 夫 -> 妹 -> 夫
-            { chain: ['HUSBAND', 'YOUNGER_SIS', 'HUSBAND'], callZh: '妹夫', callEn: 'Brother-in-law', reciprocalZh: '內兄 / 妻兄 / 哥', reciprocalEn: 'Brother-in-law', dnaPercentage: '0% (姻親)', dnaBar: 0, explanationZh: '在同性婚姻中，丈夫的妹夫可直接比照傳統配偶親屬稱謂稱為「妹夫」。', explanationEn: 'Husband\'s sister\'s husband is called Brother-in-law.' }
-        ];
+            // --- A. 常見特殊同性婚姻 / 疏離親屬精確推導矩陣 ---
 
+            // 情境 1: 我 (男/同婚) ➔ 夫 ➔ 妹 (小姑/妹子)
+            if (chainStr === 'HUSBAND->YOUNGER_SIS') {
+                return {
+                    callZh: '小姑 / 夫妹 / 妹子', callEn: 'Sister-in-law (Husband\'s Sister)',
+                    recipZh: '兄夫 / 哥 / 姐夫', recipEn: 'Brother-in-law (Brother\'s Husband)',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '在同性婚姻中，丈夫的妹妹可稱呼為「小姑」或「妹子」。對方稱呼您（哥哥的丈夫）為「兄夫」或直接隨丈夫稱呼「哥/ Brother-in-law」。',
+                    expEn: 'Your husband\'s sister is your Sister-in-law. She calls you Brother-in-law (Brother\'s Husband).'
+                };
+            }
+
+            // 情境 2: 我 ➔ 夫 ➔ 妹 ➔ 夫 (丈夫的妹夫)
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->HUSBAND') {
+                return {
+                    callZh: '妹夫 / 小叔爺', callEn: 'Brother-in-law (Husband\'s Sister\'s Husband)',
+                    recipZh: '內兄 / 妻兄 / 哥', recipEn: 'Brother-in-law',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '丈夫的妹夫可稱為「妹夫」。對方稱呼您為妻子/夫兄「內兄/妻兄/哥」。',
+                    expEn: 'Your husband\'s sister\'s husband is called Brother-in-law.'
+                };
+            }
+
+            // 情境 3: 我 ➔ 夫 ➔ 妹 ➔ 子 (丈夫的妹妹的兒子)
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON') {
+                return {
+                    callZh: '外甥 / 姑甥', callEn: 'Nephew (Husband\'s Sister\'s Son)',
+                    recipZh: '舅丈 / 舅公 / 舅爸', recipEn: 'Uncle-in-law',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的兒子屬於您的「外甥/姑甥」。對方稱呼您（母親哥哥的同性配偶）為「舅丈」或隨配偶親切稱呼「舅舅/舅爸」。',
+                    expEn: 'Your husband\'s sister\'s son is your Nephew. He calls you Uncle-in-law.'
+                };
+            }
+
+            // 情境 4: 我 ➔ 夫 ➔ 妹 ➔ DAUGHTER ➔ SON (丈夫的妹妹的女兒的兒子 - 相隔多代)
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->DAUGHTER->SON') {
+                return {
+                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
+                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的外孫（女兒的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」或「舅頭公」。',
+                    expEn: 'Your husband\'s sister\'s granddaughter\'s son is your Great-Nephew. He calls you Great-Uncle-in-law.'
+                };
+            }
+
+            // 情境 5: 我 ➔ 夫 ➔ 妹 ➔ SON ➔ SON (丈夫的妹妹的兒子的兒子)
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON->SON') {
+                return {
+                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
+                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的內孫（兒子的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」。',
+                    expEn: 'Your husband\'s sister\'s son\'s son is your Great-Nephew. He calls you Great-Uncle-in-law.'
+                };
+            }
+
+            // 情境 6: 我 ➔ 妻 ➔ 兄 ➔ 夫 (妻子的哥哥的丈夫)
+            if (chainStr === 'WIFE->ELDER_BRO->HUSBAND') {
+                return {
+                    callZh: '大舅夫', callEn: 'Brother-in-law (Wife\'s Brother\'s Husband)',
+                    recipZh: '妹婿 / 妹夫 / 妹婦', recipEn: 'Sibling-in-law',
+                    dna: '0% (姻親)', dnaBar: 0,
+                    expZh: '妻子的哥哥的丈夫稱為「大舅夫」。對方稱呼您為「妹婿/妹夫/妹婦」。',
+                    expEn: 'Your wife\'s elder brother\'s husband is called Brother-in-law (大舅夫).'
+                };
+            }
+
+            // 情境 7: 我 ➔ 母 ➔ 妹 ➔ 子 ➔ 子 (母之妹之子之子 = 表姪 / 1st Cousin Once Removed)
+            if (chainStr === 'MOTHER->YOUNGER_SIS->SON->SON') {
+                return {
+                    callZh: '表姪子 / 表姪', callEn: '1st Cousin Once Removed (Cousin\'s Son)',
+                    recipZh: '表姑丈 / 表叔丈 (若稱呼您丈夫) / 表伯叔', recipEn: 'Cousin-Uncle / Uncle-in-law',
+                    dna: '6.25%', dnaBar: 6.25,
+                    expZh: '媽媽的妹妹（姨媽）的兒子（表兄弟）的兒子，稱為「表姪」。英文為 1st Cousin Once Removed，估計基因相似度為 6.25%。若對方稱呼您的同性配偶，傳統稱「表姑丈/表叔丈」。',
+                    expEn: 'Your mother\'s sister\'s son\'s son is your 1st Cousin Once Removed. Genetic similarity ~6.25%.'
+                };
+            }
+
+            // --- B. 廣義通用動態化簡演算法 (Dynamic Chain Reduction) ---
+
+            let callZh = "";
+            let callEn = "";
+            let recipZh = "";
+            let recipEn = "";
+
+            // 多世代標籤判斷 (Generation Level Resolution)
+            if (genDelta >= 3) {
+                callZh = targetGender === 'M' ? '高祖父 / 曾祖父 / 祖輩長輩' : '高祖母 / 曾祖母 / 祖輩長輩';
+                callEn = targetGender === 'M' ? 'Great-Great Grandfather' : 'Great-Great Grandmother';
+                recipZh = userGender === 'M' ? '玄孫 / 曾孫' : '玄孫女 / 曾孫女';
+                recipEn = 'Great-Grandchild';
+            } else if (genDelta === 2) {
+                if (isMarriageLinked) {
+                    callZh = targetGender === 'M' ? '太公 / 祖岳父 / 舅丈公 / 伯丈公' : '太婆 / 祖岳母 / 姑姆婆 / 姨妗婆';
+                    callEn = 'Grandparent-in-law / Great-Uncle-in-law';
+                    recipZh = '孫婿 / 孫女媳 / 外甥孫';
+                    recipEn = 'Grandchild-in-law / Great-Niece-Nephew';
+                } else {
+                    callZh = targetGender === 'M' ? '爺爺 / 外公 / 祖父' : '奶奶 / 外婆 / 祖母';
+                    callEn = targetGender === 'M' ? 'Grandfather' : 'Grandmother';
+                    recipZh = userGender === 'M' ? '孫子 / 外孫' : '孫女 / 外孫女';
+                    recipEn = 'Grandchild';
+                }
+            } else if (genDelta === 1) {
+                if (isMarriageLinked) {
+                    callZh = targetGender === 'M' ? '岳父 / 公公 / 舅丈 / 伯丈 / 叔丈' : '岳母 / 婆婆 / 姨妗 / 姑姆 / 姑嬸';
+                    callEn = targetGender === 'M' ? 'Father-in-law / Uncle-in-law' : 'Mother-in-law / Aunt-in-law';
+                    recipZh = userGender === 'M' ? '子婿 / 兒婿 / 甥婿 / 姪婿' : '女媳 / 媳婦 / 甥媳';
+                    recipEn = 'Child-in-law / Niece-Nephew-in-law';
+                } else {
+                    callZh = targetGender === 'M' ? '伯父 / 叔父 / 舅舅 / 父親' : '姑姑 / 阿姨 / 伯母 / 嬸嬸 / 母親';
+                    callEn = targetGender === 'M' ? 'Uncle / Father' : 'Aunt / Mother';
+                    recipZh = userGender === 'M' ? '姪子 / 外甥 / 兒子' : '姪女 / 外甥女 / 女兒';
+                    recipEn = 'Niece / Nephew / Child';
+                }
+            } else if (genDelta === 0) {
+                if (isMarriageLinked) {
+                    callZh = targetGender === 'M' ? '姻兄 / 妹夫 / 大伯爺 / 小叔爺 / 舅弟夫' : '姻姐 / 弟媳 / 姑奶嫂 / 小姑嬸 / 大姨嫂';
+                    callEn = 'Sibling-in-law / Spouse\'s Sibling';
+                    recipZh = '姻親平輩 / 弟婿 / 妹媳 / 姐嫂';
+                    recipEn = 'Sibling-in-law';
+                } else {
+                    callZh = targetGender === 'M' ? '堂/表兄弟 / 兄 / 弟' : '堂/表姐妹 / 姐 / 妹';
+                    callEn = 'Cousin / Brother / Sister';
+                    recipZh = '堂/表親 / 手足';
+                    recipEn = 'Cousin / Sibling';
+                }
+            } else if (genDelta === -1) {
+                callZh = isMarriageLinked ? (targetGender === 'M' ? '子婿 / 兒婿 / 姪子婿' : '女媳 / 姪女媳') : (targetGender === 'M' ? '兒子 / 姪子 / 外甥' : '女兒 / 姪女 / 外甥女');
+                callEn = targetGender === 'M' ? 'Son / Nephew / Son-in-law' : 'Daughter / Niece / Daughter-in-law';
+                recipZh = '長輩 / 伯叔姑舅姨 / 岳父母';
+                recipEn = 'Parent / Aunt / Uncle / Parent-in-law';
+            } else { // genDelta <= -2
+                callZh = isMarriageLinked ? (targetGender === 'M' ? '孫子婿 / 甥孫婿' : '孫女媳 / 甥孫媳') : (targetGender === 'M' ? '孫子 / 外孫 / 姪孫' : '孫女 / 外孫女 / 姪孫女');
+                callEn = targetGender === 'M' ? 'Grandson / Great-Nephew' : 'Granddaughter / Great-Niece';
+                recipZh = '祖輩 / 祖岳父母 / 舅丈公';
+                recipEn = 'Grandparent / Great-Uncle';
+            }
+
+            let estimatedDna = isMarriageLinked ? 0 : Math.pow(0.5, Math.max(reducedChain.length, 1));
+            let dnaStr = isMarriageLinked ? "0% (姻親無直系血緣)" : `${(estimatedDna * 100).toFixed(2)}%`;
+
+            return {
+                callZh: callZh,
+                callEn: callEn,
+                recipZh: recipZh,
+                recipEn: recipEn,
+                dna: dnaStr,
+                dnaBar: estimatedDna * 100,
+                expZh: `這是一條相隔 ${reducedChain.length} 個節點、世代差為 ${Math.abs(genDelta)} 代的深層親屬關係。系統已依據高階關係網絡為您化簡推算。在多元成家與現代社群中，使用「配偶的親戚」或稱呼名字均十分融洽親切。`,
+                expEn: `This extended chain spans ${reducedChain.length} links with ${Math.abs(genDelta)} generation gap. Computed via adaptive graph algorithm.`
+            };
+        }
+
+        // 初始化與 UI 事件 Binding
         document.addEventListener('DOMContentLoaded', () => {
             initEventListeners();
             updateUIByLang();
@@ -494,51 +628,24 @@
         }
 
         function calculateKinship() {
-            const placeholder = document.getElementById('result-placeholder');
-            const content = document.getElementById('result-content');
-            
-            placeholder.classList.add('hidden');
-            content.classList.remove('hidden');
+            document.getElementById('result-placeholder').classList.add('hidden');
+            document.getElementById('result-content').classList.remove('hidden');
 
-            const chainKeys = state.chain;
-            
-            let matchedRule = kinshipDatabase.find(rule => {
-                return rule.chain.length === chainKeys.length && 
-                       rule.chain.every((val, index) => val === chainKeys[index]);
-            });
+            const result = solveExtendedKinship(state.myGender, state.maritalStatus, state.chain);
 
-            if (!matchedRule) {
-                matchedRule = fallbackKinshipInference(state.myGender, state.maritalStatus, chainKeys);
+            if (result) {
+                document.getElementById('res-call-zh').innerText = result.callZh;
+                document.getElementById('res-call-en').innerText = result.callEn;
+                document.getElementById('res-reciprocal-zh').innerText = result.recipZh;
+                document.getElementById('res-reciprocal-en').innerText = result.recipEn;
+                document.getElementById('res-dna-percentage').innerText = result.dna;
+                
+                const dnaBar = document.getElementById('res-dna-bar');
+                dnaBar.style.width = `${Math.min(result.dnaBar || 0, 100)}%`;
+
+                document.getElementById('res-explanation').innerText = 
+                    state.lang === 'zh' ? result.expZh : result.expEn;
             }
-
-            document.getElementById('res-call-zh').innerText = matchedRule.callZh;
-            document.getElementById('res-call-en').innerText = matchedRule.callEn;
-            document.getElementById('res-reciprocal-zh').innerText = matchedRule.reciprocalZh;
-            document.getElementById('res-reciprocal-en').innerText = matchedRule.reciprocalEn;
-            document.getElementById('res-dna-percentage').innerText = matchedRule.dnaPercentage;
-            
-            const dnaBar = document.getElementById('res-dna-bar');
-            dnaBar.style.width = `${Math.min(matchedRule.dnaBar, 100)}%`;
-
-            document.getElementById('res-explanation').innerText = 
-                state.lang === 'zh' ? matchedRule.explanationZh : matchedRule.explanationEn;
-        }
-
-        function fallbackKinshipInference(gender, status, chain) {
-            let isInLaw = chain.some(rel => ['HUSBAND', 'WIFE', 'PARTNER'].includes(rel));
-            let estimatedDna = isInLaw ? 0 : Math.pow(0.5, chain.length);
-            let dnaPercentStr = isInLaw ? "0% (姻親)" : `${(estimatedDna * 100).toFixed(2)}%`;
-
-            return {
-                callZh: "親屬 / 遠親",
-                callEn: "Relative",
-                reciprocalZh: "親戚 / 姻親",
-                reciprocalEn: "Relative",
-                dnaPercentage: dnaPercentStr,
-                dnaBar: estimatedDna * 100,
-                explanationZh: `此關係鏈包含 ${chain.length} 層親屬。在多元性別社群中，建議亦可直接稱呼對方名字。`,
-                explanationEn: `This chain spans ${chain.length} steps. Addressing by name is also common.`
-            };
         }
 
         function resetResultDisplay() {
