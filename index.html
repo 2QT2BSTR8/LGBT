@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Core Title & Meta Data -->
     <title>《全方位 多元親屬稱謂 暨 基因近似度 計算機》 | LGBTQIA+ Kinship & Genetic Similarity Calculator</title>
+    <meta name="description" content="A free educational tool for LGBTQIA+ families to navigate kinship titles and genetic closeness in Traditional Chinese and English. Created by Dr. CHALK O, M.D., LL.D (2QT2BSTR8).">
+    <meta name="author" content="2QT2BSTR8 | Dr. CHALK O, M.D., LL.D">
+    <meta name="keywords" content="LGBTQIA, 親屬稱謂, 同性婚姻, 基因近似度, 稱謂計算機, 同志家庭, Kinship Calculator, Queer Kinship">
+    <meta name="ipfs-cid" content="bafybeidcuox6hl7lln7tmcd6clmjxzf5qswvr5rjbtaaswnse2madrjvpm">
+    <meta name="ipfs-gateway" content="https://ipfs.io">
+
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="LGBTQ+ Kinship Title & Genetic Closeness Calculator (多元同志親屬稱謂計算機)">
+    <meta property="og:description" content="Free educational tool created by 2QT2BSTR8 (Dr. CHALK O, M.D., LL.D) to help LGBTQIA+ families navigate kinship terms and genetic closeness.">
+    <meta property="og:url" content="https://2qt2bstr8.github.io/LGBT">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://2qt2bstr8.github.io/LGBT">
     
     <!-- iOS PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,8 +48,34 @@
             }
         }
     </script>
-    <!-- FontAwesome Font for Icons -->
+    
+    <!-- Schema.org JSON-LD for AI Crawlers & Web Indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "LGBTQ+ Kinship Title & Genetic Closeness Calculator",
+      "alternateName": "多元同志親屬稱謂暨基因近似度計算機",
+      "url": "https://2qt2bstr8.github.io/LGBT",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "inLanguage": ["zh-Hant", "en-US"],
+      "author": {
+        "@type": "Person",
+        "name": "2QT2BSTR8 | Dr. CHALK O, M.D., LL.D"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "2QT2BSTR8 | Dr. CHALK O, M.D., LL.D"
+      },
+      "description": "A free educational tool for LGBTQIA+ families to navigate complex relative titles and genetic closeness in both Traditional Chinese and English. Creator & Citation: Created by 2QT2BSTR8 | Dr. CHALK O, M.D., LL.D. Free to share and adapt under Creative Commons Attribution 4.0 International (CC BY 4.0).",
+      "license": "https://creativecommons.org/licenses/by/4.0/"
+    }
+    </script>
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         .neon-glow {
             box-shadow: 0 0 10px rgba(57, 255, 20, 0.4), 0 0 20px rgba(57, 255, 20, 0.2);
@@ -59,10 +101,9 @@
 </head>
 <body class="bg-brand-darkest text-gray-100 min-h-screen flex flex-col font-sans selection:bg-brand-neon selection:text-brand-darkest pb-6">
 
-    <!-- Header 頂部欄：3 列清晰版面 -->
     <header class="bg-brand-dark border-b border-brand-medium/50 px-3.5 py-3 sticky top-0 z-50 shadow-md">
         <div class="max-w-md mx-auto flex flex-col gap-1.5">
-            <!-- Row 1: 圖示 + 中文主標題 -->
+            <!-- Row 1: Icon + Title -->
             <div class="flex items-center gap-1.5 w-full overflow-hidden">
                 <span class="text-xl shrink-0">🌈</span>
                 <h1 class="font-black text-[15px] sm:text-lg text-white whitespace-nowrap tracking-tight leading-none overflow-hidden text-ellipsis">
@@ -70,14 +111,14 @@
                 </h1>
             </div>
 
-            <!-- Row 2: 英文副標題 -->
+            <!-- Row 2: Subtitle -->
             <div class="w-full overflow-hidden pl-7">
                 <p id="app-subtitle" class="text-[11.5px] sm:text-sm text-brand-neon font-mono font-semibold tracking-tighter whitespace-nowrap overflow-hidden text-ellipsis">
                     LGBTQIA+ Kinship & Genetic Similarity Calculator
                 </p>
             </div>
 
-            <!-- Row 3: 語言切換按鈕 -->
+            <!-- Row 3: Language Toggle Button -->
             <div class="flex justify-end pt-0.5">
                 <button id="lang-toggle-btn" class="bg-brand-medium hover:bg-brand-light text-brand-neon border border-brand-neon/40 text-[11px] px-2.5 py-1 rounded-full transition font-semibold flex items-center gap-1 shadow-sm">
                     <i class="fa-solid fa-globe text-[10px]"></i>
@@ -87,12 +128,11 @@
         </div>
     </header>
 
-    <!-- 主體內容區塊 -->
     <main class="flex-1 max-w-md w-full mx-auto p-3 flex flex-col justify-between">
         
-        <!-- 設定面板：性別與婚姻狀態 -->
+        <!-- User Options: Gender & Status -->
         <section class="bg-brand-dark rounded-xl p-3 border border-brand-medium mb-3 shadow-lg">
-            <!-- 我的性別選擇 -->
+            <!-- My Gender Selector -->
             <div class="mb-2.5">
                 <label class="block text-xs font-medium text-gray-300 mb-1 flex items-center gap-1">
                     <i class="fa-solid fa-user text-brand-neon text-[10px]"></i>
@@ -111,7 +151,7 @@
                 </div>
             </div>
 
-            <!-- 婚姻/伴侶狀態選擇 -->
+            <!-- Relationship Status Selector -->
             <div>
                 <label class="block text-xs font-medium text-gray-300 mb-1 flex items-center gap-1">
                     <i class="fa-solid fa-heart text-brand-neon text-[10px]"></i>
@@ -128,9 +168,8 @@
             </div>
         </section>
 
-        <!-- 關係鏈輸入與結果顯示螢幕區 -->
         <section class="bg-brand-dark border-2 border-brand-medium rounded-xl p-3.5 mb-3 flex-1 flex flex-col justify-between shadow-inner relative overflow-hidden">
-            <!-- 關係鏈輸入顯示 -->
+            <!-- Relationship Chain Monitor -->
             <div class="mb-2">
                 <div class="text-[11px] text-gray-400 uppercase tracking-wider mb-0.5 flex justify-between">
                     <span id="lbl-input-chain">關係鏈 / Chain:</span>
@@ -141,17 +180,17 @@
                 </div>
             </div>
 
-            <!-- 計算結果核心面板 -->
+            <!-- Calculation Output Card -->
             <div id="result-container" class="bg-brand-darkest/90 rounded-lg p-3 border border-brand-light/50 flex-1 flex flex-col justify-center my-1 relative">
-                <!-- 預設提示（尚未按下計算時） -->
+                <!-- Placeholder when empty -->
                 <div id="result-placeholder" class="text-center py-4 text-gray-400">
                     <i class="fa-solid fa-calculator text-3xl text-brand-light mb-2 block"></i>
                     <p class="text-xs" id="msg-placeholder">請按下方按鈕組合關係，然後點擊「=」計算稱謂</p>
                 </div>
 
-                <!-- 計算結果顯示（隱藏） -->
+                <!-- Result display card -->
                 <div id="result-content" class="hidden space-y-2.5">
-                    <!-- 稱謂主要結果 -->
+                    <!-- Primary Title Result -->
                     <div>
                         <span class="text-[10px] text-brand-neon uppercase font-semibold block" id="lbl-call-target">我應該稱呼對方為 / You call them:</span>
                         <div id="res-call" class="text-lg font-extrabold text-white leading-snug mt-0.5">
@@ -160,7 +199,7 @@
                         </div>
                     </div>
 
-                    <!-- 雙向互稱：對方稱呼我 -->
+                    <!-- Reciprocal Title Result -->
                     <div class="border-t border-brand-medium/50 pt-1.5">
                         <span class="text-[10px] text-gray-400 uppercase font-semibold block" id="lbl-target-call-me">對方應該稱呼我為 / They call you:</span>
                         <div id="res-reciprocal" class="text-sm font-bold text-gray-200 mt-0.5">
@@ -169,10 +208,10 @@
                         </div>
                     </div>
 
-                    <!-- 世代與基因相似度估算 -->
+                    <!-- Genetic Similarity & Legal Kinship Status -->
                     <div class="border-t border-brand-medium/50 pt-1.5">
                         <div class="flex justify-between items-center">
-                            <span class="text-[10px] text-gray-400 uppercase font-semibold" id="lbl-dna-similarity">基因相似度估算 / Genetic Similarity:</span>
+                            <span class="text-[10px] text-gray-400 uppercase font-semibold" id="lbl-dna-similarity">基因近似度估算 / Genetic Similarity:</span>
                             <span id="res-dna-percentage" class="text-xs font-mono font-bold text-brand-neon">0%</span>
                         </div>
                         <div class="w-full bg-brand-medium/40 h-1.5 rounded-full mt-1 overflow-hidden">
@@ -180,7 +219,7 @@
                         </div>
                     </div>
 
-                    <!-- LGBTQIA+ 多元/包容性稱謂觀點解釋 -->
+                    <!-- LGBTQIA+ Inclusive Kinship Explanation -->
                     <div class="bg-brand-medium/30 p-2 rounded border border-brand-light/30 text-xs text-gray-300">
                         <span class="text-brand-neon font-bold flex items-center gap-1 mb-0.5">
                             <span>🌈</span> <span id="lbl-explanation-title">多元親屬與社群觀點說明：</span>
@@ -193,26 +232,25 @@
             </div>
         </section>
 
-        <!-- 計算機按鈕面板 -->
         <section class="grid grid-cols-4 gap-1.5 mb-3">
-            <!-- 第一排 -->
+            <!-- Row 1 -->
             <button type="button" data-rel="FATHER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">父</button>
             <button type="button" data-rel="MOTHER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">母</button>
             <button type="button" data-rel="HUSBAND" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">夫</button>
             <button type="button" data-rel="WIFE" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">妻</button>
 
-            <!-- 第二排 -->
+            <!-- Row 2 -->
             <button type="button" data-rel="ELDER_BRO" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">兄</button>
             <button type="button" data-rel="YOUNGER_BRO" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">弟</button>
             <button type="button" data-rel="ELDER_SIS" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">姐</button>
             <button type="button" data-rel="YOUNGER_SIS" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">妹</button>
 
-            <!-- 第三排 -->
+            <!-- Row 3 -->
             <button type="button" data-rel="SON" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">子</button>
             <button type="button" data-rel="DAUGHTER" class="rel-btn bg-brand-medium hover:bg-brand-light text-white font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">女</button>
             <button type="button" data-rel="PARTNER" class="rel-btn bg-brand-light hover:bg-brand-accent text-brand-neon font-bold py-2.5 rounded-xl text-xs shadow transition active:scale-95 col-span-2 border border-brand-neon/40">伴侶 Partner</button>
 
-            <!-- 第四排：控制按鈕 (AC, Delete, 計算) -->
+            <!-- Row 4: Controls (AC, Del, Calc) -->
             <button type="button" id="btn-ac" class="bg-red-900/80 hover:bg-red-800 text-red-200 font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">AC</button>
             <button type="button" id="btn-del" class="bg-yellow-900/80 hover:bg-yellow-800 text-yellow-200 font-bold py-2.5 rounded-xl text-sm shadow transition active:scale-95">刪除</button>
             <button type="button" id="btn-calc" class="bg-brand-neon hover:bg-brand-neonHover text-brand-darkest font-extrabold py-2.5 rounded-xl text-sm shadow neon-glow transition active:scale-95 col-span-2 flex items-center justify-center gap-1">
@@ -221,9 +259,8 @@
             </button>
         </section>
 
-        <!-- 延伸閱讀與創作者資訊 Footer -->
         <footer class="bg-brand-dark rounded-xl p-3 border border-brand-medium/60 text-center text-xs space-y-2">
-            <!-- 文章延伸閱讀按鈕 -->
+            <!-- Article Link -->
             <div>
                 <a href="https://matters.town/a/pezdlqf8e7a9/history" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-brand-medium hover:bg-brand-light text-brand-neon px-3 py-1.5 rounded-lg border border-brand-neon/30 transition text-xs font-medium">
                     <span>📖</span>
@@ -232,28 +269,34 @@
                 </a>
             </div>
 
-            <!-- 創作者 IG 標記 -->
-            <div class="text-gray-400 text-[11px] pt-1 border-t border-brand-medium/40 flex items-center justify-center gap-1">
-                <span>Designed & Created by</span>
-                <a href="https://instagram.com/2QT2BSTR8" target="_blank" rel="noopener noreferrer" class="text-brand-neon hover:underline font-bold flex items-center gap-0.5">
-                    <i class="fa-brands fa-instagram"></i>
-                    <span>@2QT2BSTR8</span>
-                </a>
-                <span class="text-gray-500">(Too Cute To Be Straight)</span>
+            <!-- Author & Citation Tag -->
+            <div class="text-gray-400 text-[11px] pt-1 border-t border-brand-medium/40 flex flex-col items-center justify-center gap-0.5">
+                <div>
+                    <span>Designed & Created by</span>
+                    <a href="https://instagram.com/2QT2BSTR8" target="_blank" rel="noopener noreferrer" class="text-brand-neon hover:underline font-bold inline-flex items-center gap-0.5">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>2QT2BSTR8</span>
+                    </a>
+                    <span class="text-gray-400"> (Dr. CHALK O, M.D., LL.D)</span>
+                </div>
+                <div class="text-[10px] text-gray-500">
+                    CC BY 4.0 Free Educational Tool
+                </div>
             </div>
         </footer>
 
     </main>
 
-    <!-- JavaScript 核心高階親屬遞迴演算法引擎 -->
     <script>
+        // Global Application State
         const state = {
             lang: 'zh',
-            myGender: 'M',
-            maritalStatus: 'SAME_SEX',
+            myGender: 'M', // 'M', 'F', 'NB'
+            maritalStatus: 'SAME_SEX', // 'SAME_SEX', 'HETERO'
             chain: []
         };
 
+        // Internationalization Dictionary
         const i18n = {
             zh: {
                 appTitle: "《全方位 多元親屬稱謂 暨 基因近似度 計算機》",
@@ -271,7 +314,7 @@
                 msgPlaceholder: "請按下方按鈕組合關係，然後點擊「=」計算稱謂",
                 lblCallTarget: "我應該稱呼對方為 / You call them:",
                 lblTargetCallMe: "對方應該稱呼我為 / They call you:",
-                lblDnaSimilarity: "基因相似度估算 / Genetic Similarity:",
+                lblDnaSimilarity: "基因近似度估算 / Genetic Similarity:",
                 lblExplanationTitle: "多元親屬與社群觀點說明：",
                 btnCalcText: "計算稱謂",
                 lblArticleLink: "閱讀創作者關於同性稱謂的文章",
@@ -314,24 +357,33 @@
             }
         };
 
-        // 親屬網絡與動態演算引擎（Kinship Graph Reduction Engine）
         function solveExtendedKinship(userGender, userStatus, rawChain) {
             if (!rawChain || rawChain.length === 0) return null;
 
             let chain = [...rawChain];
-            let genDelta = 0;
-            let isMarriageLinked = false;
+            const chainStr = chain.join('->');
+            const genderDiversityNote = "依個人喜好，有人選擇運用中性或性向流動之詞彙，亦有人注入傳統男女稱謂於同性婚姻關係中。";
 
-            const nodeGenderMap = {
-                FATHER: 'M', MOTHER: 'F', HUSBAND: 'M', WIFE: 'F',
-                ELDER_BRO: 'M', YOUNGER_BRO: 'M', ELDER_SIS: 'F', YOUNGER_SIS: 'F',
-                SON: 'M', DAUGHTER: 'F', PARTNER: 'NB'
-            };
+            // 1. 特殊關係簡化處理 (Self & Direct Partner Edge Cases)
+            // 父/母 -> 子/女 => 手足或自己
+            if (['FATHER->SON', 'MOTHER->SON', 'FATHER->DAUGHTER', 'MOTHER->DAUGHTER'].includes(chainStr)) {
+                const targetGender = (chain[1] === 'SON') ? 'M' : 'F';
+                const callZhStr = targetGender === 'M' ? "兄弟 / 手足 / 自己" : "姊妹 / 手足 / 自己";
+                const callEnStr = targetGender === 'M' ? "Brother / Sibling / Self" : "Sister / Sibling / Self";
+                return {
+                    callZh: callZhStr, callEn: callEnStr,
+                    recipZh: userGender === 'M' ? "兄弟 / 手足" : (userGender === 'F' ? "姊妹 / 手足" : "手足"),
+                    recipEn: "Sibling / Self",
+                    dna: "50% ~ 100% (全胞手足 50% / 自己 100%)", dnaBar: 50,
+                    expZh: "此關係鏈代表父母的孩子，即為您的手足（兄弟姊妹）或您自己。",
+                    expEn: "This chain refers to your parent's child, which means your sibling or yourself."
+                };
+            }
 
-            // 1. 純配偶／伴侶鏈判定（如 夫、妻、伴侶、夫->夫、妻->妻 等多重組合）
+            // 2. 純配偶 / 伴侶鏈判定 (Partner & Spouse Chains)
             const isPurePartnerChain = chain.every(item => ['HUSBAND', 'WIFE', 'PARTNER'].includes(item));
             if (isPurePartnerChain) {
-                // 決定目標性別：若最後一個為夫則男，妻則女，否則預設或依據使用者
+                // 若只按下單一配偶，或多次重複配偶
                 let targetGender = 'NB';
                 const lastItem = chain[chain.length - 1];
                 if (lastItem === 'HUSBAND') targetGender = 'M';
@@ -341,141 +393,106 @@
                     else targetGender = (userGender === 'M') ? 'F' : 'M';
                 }
 
-                const genderDiversityNote = "依個人喜好，有人刻意運用多元性別或性向的詞彙以強調理性性別平等及主觀性向流動，亦有人刻意注入男或女的稱呼於同性關係中較剛陽或柔弱的一方。";
-
                 if (targetGender === 'M' || (userGender === 'M' && userStatus === 'SAME_SEX')) {
                     return {
-                        callZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 寶貝 / 配偶",
+                        callZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 配偶",
                         callEn: "Husband / Partner / Spouse / Significant Other",
-                        recipZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 寶貝 / 配偶",
-                        recipEn: "Husband / Partner / Spouse / Significant Other",
-                        dna: "0% (無血緣關係)",
-                        dnaBar: 0,
-                        expZh: `同性伴侶（男男配偶）之稱謂。${genderDiversityNote}`,
+                        recipZh: userGender === 'M' ? "丈夫 / 伴侶 / 愛人 / 另一半 / 老公" : (userGender === 'F' ? "太太 / 妻子 / 伴侶" : "伴侶 / 配偶"),
+                        recipEn: "Husband / Partner / Spouse",
+                        dna: "0% (姻親親權關係)", dnaBar: 0,
+                        expZh: `同性/跨性別伴侶之稱謂。${genderDiversityNote}`,
                         expEn: "Terms for male same-sex partners and spouses. " + genderDiversityNote
                     };
                 } else if (targetGender === 'F' || (userGender === 'F' && userStatus === 'SAME_SEX')) {
                     return {
-                        callZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 寶貝 / 配偶",
+                        callZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 配偶",
                         callEn: "Wife / Partner / Spouse / Significant Other",
-                        recipZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 寶貝 / 配偶",
-                        recipEn: "Wife / Partner / Spouse / Significant Other",
-                        dna: "0% (無血緣關係)",
-                        dnaBar: 0,
-                        expZh: `同性伴侶（女女配偶）之稱謂。${genderDiversityNote}`,
+                        recipZh: userGender === 'F' ? "太太 / 伴侶 / 愛人 / 另一半 / 老婆" : (userGender === 'M' ? "丈夫 / 配偶" : "伴侶 / 配偶"),
+                        recipEn: "Wife / Partner / Spouse",
+                        dna: "0% (姻親親權關係)", dnaBar: 0,
+                        expZh: `同性/跨性別伴侶（女性/女女配偶）之稱謂。${genderDiversityNote}`,
                         expEn: "Terms for female same-sex partners and spouses. " + genderDiversityNote
                     };
                 } else {
                     return {
                         callZh: "伴侶 / 愛人 / 另一半 / 寶貝 / 配偶",
                         callEn: "Partner / Spouse / Significant Other",
-                        recipZh: "伴侶 / 愛人 / 另一半 / 寶貝 / 配偶",
+                        recipZh: "伴侶 / 愛人 / 另一半 / 配偶",
                         recipEn: "Partner / Spouse / Significant Other",
-                        dna: "0% (無血緣關係)",
-                        dnaBar: 0,
-                        expZh: `多元性別與性向包容稱謂。${genderDiversityNote}`,
+                        dna: "0% (姻親親權關係)", dnaBar: 0,
+                        expZh: `多元性別與中性包容稱謂。${genderDiversityNote}`,
                         expEn: "Gender-neutral inclusive terms for partner and spouse."
                     };
                 }
             }
 
-            // 2. 統計世代與婚姻標籤
-            let lastGender = 'M';
-            chain.forEach(node => {
-                if (['FATHER', 'MOTHER'].includes(node)) genDelta += 1;
-                if (['SON', 'DAUGHTER'].includes(node)) genDelta -= 1;
-                if (['HUSBAND', 'WIFE', 'PARTNER'].includes(node)) isMarriageLinked = true;
-                lastGender = nodeGenderMap[node] || 'M';
-            });
-
-            const chainStr = chain.join('->');
-            const targetGender = lastGender;
-
-            // --- A. 特殊同性婚姻 / 疏離親屬精確對照矩陣 ---
+            // 3. 特殊同性婚姻 / 姻親對照矩陣 (具備動態 userGender 對應)
             if (chainStr === 'HUSBAND->YOUNGER_SIS') {
+                const recipZh = (userGender === 'M') ? '兄夫 / 哥 / 兄長配偶' : (userGender === 'F' ? '嫂嫂 / 大嫂 / 姊妹配偶' : '手足配偶');
+                const recipEn = (userGender === 'M') ? 'Brother-in-law (Brother\'s Husband)' : 'Sister-in-law (Sister\'s Wife)';
                 return {
                     callZh: '小姑 / 夫妹 / 妹子', callEn: 'Sister-in-law (Husband\'s Sister)',
-                    recipZh: '兄夫 / 哥 / 姐夫', recipEn: 'Brother-in-law (Brother\'s Husband)',
+                    recipZh: recipZh, recipEn: recipEn,
                     dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '在同性婚姻中，丈夫的妹妹可稱呼為「小姑」或「妹子」。對方稱呼您（哥哥的丈夫）為「兄夫」或直接隨丈夫稱呼「哥 / Brother-in-law」。',
-                    expEn: 'Your husband\'s sister is your Sister-in-law. She calls you Brother-in-law (Brother\'s Husband).'
-                };
-            }
-
-            if (chainStr === 'HUSBAND->YOUNGER_SIS->HUSBAND') {
-                return {
-                    callZh: '妹夫 / 小叔爺', callEn: 'Brother-in-law (Husband\'s Sister\'s Husband)',
-                    recipZh: '內兄 / 妻兄 / 哥', recipEn: 'Brother-in-law',
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '丈夫的妹夫可稱為「妹夫」。對方稱呼您為「內兄 / 妻兄 / 哥」。',
-                    expEn: 'Your husband\'s sister\'s husband is called Brother-in-law.'
-                };
-            }
-
-            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON') {
-                return {
-                    callZh: '外甥 / 姑甥', callEn: 'Nephew (Husband\'s Sister\'s Son)',
-                    recipZh: '舅丈 / 舅公 / 舅爸', recipEn: 'Uncle-in-law',
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '丈夫的妹妹的兒子屬於您的「外甥/姑甥」。對方稱呼您（母親哥哥的同性配偶）為「舅丈」或隨配偶親切稱呼「舅舅/舅爸」。',
-                    expEn: 'Your husband\'s sister\'s son is your Nephew. He calls you Uncle-in-law.'
-                };
-            }
-
-            if (chainStr === 'HUSBAND->YOUNGER_SIS->DAUGHTER->SON') {
-                return {
-                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
-                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '丈夫的妹妹的外孫（女兒的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」或「舅頭公」。',
-                    expEn: 'Your husband\'s sister\'s granddaughter\'s son is your Great-Nephew. He calls you Great-Uncle-in-law.'
-                };
-            }
-
-            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON->SON') {
-                return {
-                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
-                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '丈夫的妹妹的內孫（兒子的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」。',
-                    expEn: 'Your husband\'s sister\'s son\'s son is your Great-Nephew. He calls you Great-Uncle-in-law.'
+                    expZh: '丈夫的妹妹可稱呼為「小姑」或「妹子」。對方稱呼您為兄長/姊妹之配偶。',
+                    expEn: 'Your husband\'s sister is your Sister-in-law.'
                 };
             }
 
             if (chainStr === 'WIFE->ELDER_BRO->HUSBAND') {
+                const recipZh = (userGender === 'M') ? '妹婿 / 妹夫' : (userGender === 'F' ? '妹婦 / 小姑' : '妹手足配偶');
                 return {
-                    callZh: '大舅夫', callEn: 'Brother-in-law (Wife\'s Brother\'s Husband)',
-                    recipZh: '妹婿 / 妹夫 / 妹婦', recipEn: 'Sibling-in-law',
+                    callZh: '大舅夫 / 大舅哥配偶', callEn: 'Brother-in-law (Wife\'s Brother\'s Husband)',
+                    recipZh: recipZh, recipEn: 'Sibling-in-law',
                     dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '妻子的哥哥的丈夫稱為「大舅夫」。對方稱呼您為「妹婿/妹夫/妹婦」。',
-                    expEn: 'Your wife\'s elder brother\'s husband is called Brother-in-law (大舅夫).'
+                    expZh: '妻子的哥哥的同性配偶稱為「大舅夫」。對方稱呼您為妹婿/妹婦。',
+                    expEn: 'Your wife\'s elder brother\'s husband is called Brother-in-law.'
                 };
             }
 
             if (chainStr === 'MOTHER->YOUNGER_SIS->SON->SON') {
+                const recipZh = (userGender === 'M') ? '表伯父 / 表叔父' : (userGender === 'F' ? '表姑母 / 表姨母' : '表親長輩');
                 return {
                     callZh: '表姪子 / 表姪', callEn: '1st Cousin Once Removed (Cousin\'s Son)',
-                    recipZh: '表姑丈 / 表叔丈 (若稱呼您丈夫) / 表伯叔', recipEn: 'Cousin-Uncle / Uncle-in-law',
-                    dna: '6.25%', dnaBar: 6.25,
-                    expZh: '媽媽的妹妹（姨媽）的兒子（表兄弟）的兒子，稱為「表姪」。英文為 1st Cousin Once Removed，估計基因相似度為 6.25%。若對方稱呼您的同性配偶，傳統稱「表姑丈/表叔丈」。',
+                    recipZh: recipZh, recipEn: 'Cousin-Uncle / Cousin-Aunt',
+                    dna: '6.25% (直系基因血緣)', dnaBar: 6.25,
+                    expZh: '母親妹妹的兒子（表兄弟）的兒子，屬於表姪。生物學基因相似度約 6.25%。若為同志家庭收養或無基因連結，基因近似度為 0%，親權關係不變。',
                     expEn: 'Your mother\'s sister\'s son\'s son is your 1st Cousin Once Removed. Genetic similarity ~6.25%.'
                 };
             }
 
-            // --- B. 廣義通用動態化簡與過度疏離「家屬/家人」客觀處理 ---
-            const neutralDistantNote = "此關係在傳統系統中無固定稱謂，建議可使用對方的名字、描述（包括 pronouns）或中性稱呼。";
+            // 4. 通用世代與基因相似度計算引擎
+            let genDelta = 0;
+            let isMarriageLinked = false;
+            let directAncestryDegree = 0; // 計算旁系血親距離
 
-            // 關係鏈長度過長（超過 4 層且涉複雜姻親）或無法歸類
+            const nodeGenderMap = {
+                FATHER: 'M', MOTHER: 'F', HUSBAND: 'M', WIFE: 'F',
+                ELDER_BRO: 'M', YOUNGER_BRO: 'M', ELDER_SIS: 'F', YOUNGER_SIS: 'F',
+                SON: 'M', DAUGHTER: 'F', PARTNER: 'NB'
+            };
+
+            let lastGender = 'M';
+            chain.forEach(node => {
+                if (['FATHER', 'MOTHER'].includes(node)) { genDelta += 1; directAncestryDegree += 1; }
+                if (['SON', 'DAUGHTER'].includes(node)) { genDelta -= 1; directAncestryDegree += 1; }
+                if (['ELDER_BRO', 'YOUNGER_BRO', 'ELDER_SIS', 'YOUNGER_SIS'].includes(node)) { directAncestryDegree += 1; }
+                if (['HUSBAND', 'WIFE', 'PARTNER'].includes(node)) { isMarriageLinked = true; }
+                lastGender = nodeGenderMap[node] || 'M';
+            });
+
+            const targetGender = lastGender;
+
+            // 廣義遠親判定
             if (chain.length >= 4 && isMarriageLinked) {
                 return {
                     callZh: "家屬 / 家人 / 姻親家人",
                     callEn: "Family Member / Extended In-law",
                     recipZh: "家屬 / 家人 / 姻親家人",
                     recipEn: "Family Member / Extended In-law",
-                    dna: "0% (姻親遠親)",
-                    dnaBar: 0,
-                    expZh: `此親屬關係相隔較多層（共 ${chain.length} 個節點）。${neutralDistantNote}`,
-                    expEn: `Extended family relationship spanning ${chain.length} links. ${neutralDistantNote}`
+                    dna: "0% (姻親遠親)", dnaBar: 0,
+                    expZh: `此親屬關係相隔較多層（共 ${chain.length} 個節點）。在傳統稱謂中無固定詞彙，建議直接稱呼姓名或中性暱稱。`,
+                    expEn: `Extended family relationship spanning ${chain.length} links. Recommended to use name or preferred terms.`
                 };
             }
 
@@ -487,38 +504,38 @@
             if (genDelta >= 3) {
                 callZh = targetGender === 'M' ? '高祖父 / 曾祖父 / 祖輩長輩' : '高祖母 / 曾祖母 / 祖輩長輩';
                 callEn = targetGender === 'M' ? 'Great-Great Grandfather' : 'Great-Great Grandmother';
-                recipZh = userGender === 'M' ? '玄孫 / 曾孫' : '玄孫女 / 曾孫女';
+                recipZh = userGender === 'M' ? '玄孫 / 曾孫' : (userGender === 'F' ? '玄孫女 / 曾孫女' : '曾孫輩');
                 recipEn = 'Great-Grandchild';
             } else if (genDelta === 2) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '太公 / 祖岳父 / 舅丈公 / 伯丈公 / 家屬' : '太婆 / 祖岳母 / 姑姆婆 / 姨妗婆 / 家屬';
-                    callEn = 'Grandparent-in-law / Great-Uncle-in-law / Family';
-                    recipZh = '孫婿 / 孫女媳 / 外甥孫 / 家屬';
-                    recipEn = 'Grandchild-in-law / Great-Niece-Nephew';
+                    callZh = targetGender === 'M' ? '太公 / 祖岳父 / 家屬長輩' : '太婆 / 祖岳母 / 家屬長輩';
+                    callEn = 'Grandparent-in-law / Family Elder';
+                    recipZh = '孫婿 / 孫女媳 / 家屬晚輩';
+                    recipEn = 'Grandchild-in-law';
                 } else {
                     callZh = targetGender === 'M' ? '爺爺 / 外公 / 祖父' : '奶奶 / 外婆 / 祖母';
                     callEn = targetGender === 'M' ? 'Grandfather' : 'Grandmother';
-                    recipZh = userGender === 'M' ? '孫子 / 外孫' : '孫女 / 外孫女';
+                    recipZh = userGender === 'M' ? '孫子 / 外孫' : (userGender === 'F' ? '孫女 / 外孫女' : '孫輩');
                     recipEn = 'Grandchild';
                 }
             } else if (genDelta === 1) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '岳父 / 公公 / 舅丈 / 伯丈 / 叔丈 / 家屬' : '岳母 / 婆婆 / 姨妗 / 姑姆 / 姑嬸 / 家屬';
+                    callZh = targetGender === 'M' ? '岳父 / 公公 / 舅丈 / 伯丈' : '岳母 / 婆婆 / 姨妗 / 姑姆';
                     callEn = targetGender === 'M' ? 'Father-in-law / Uncle-in-law' : 'Mother-in-law / Aunt-in-law';
-                    recipZh = userGender === 'M' ? '子婿 / 兒婿 / 甥婿 / 姪婿' : '女媳 / 媳婦 / 甥媳';
-                    recipEn = 'Child-in-law / Niece-Nephew-in-law';
+                    recipZh = userGender === 'M' ? '賢婿 / 兒婿 / 姪婿' : (userGender === 'F' ? '賢媳 / 媳婦 / 姪媳' : '晚輩配偶');
+                    recipEn = 'Child-in-law';
                 } else {
-                    callZh = targetGender === 'M' ? '伯父 / 叔父 / 舅舅 / 父親' : '姑姑 / 阿姨 / 伯母 / 嬸嬸 / 母親';
+                    callZh = targetGender === 'M' ? '伯父 / 叔父 / 舅舅 / 父親' : '姑姑 / 阿姨 / 伯母 / 母親';
                     callEn = targetGender === 'M' ? 'Uncle / Father' : 'Aunt / Mother';
-                    recipZh = userGender === 'M' ? '姪子 / 外甥 / 兒子' : '姪女 / 外甥女 / 女兒';
+                    recipZh = userGender === 'M' ? '姪子 / 外甥 / 兒子' : (userGender === 'F' ? '姪女 / 外甥女 / 女兒' : '晚輩');
                     recipEn = 'Niece / Nephew / Child';
                 }
             } else if (genDelta === 0) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '姻兄 / 妹夫 / 大伯爺 / 小叔爺 / 舅弟夫 / 家屬' : '姻姐 / 弟媳 / 姑奶嫂 / 小姑嬸 / 大姨嫂 / 家屬';
-                    callEn = 'Sibling-in-law / Spouse\'s Sibling / Family';
-                    recipZh = '姻親平輩 / 弟婿 / 妹媳 / 姐嫂 / 家屬';
-                    recipEn = 'Sibling-in-law / Family';
+                    callZh = targetGender === 'M' ? '姻兄 / 妹夫 / 大伯 / 小叔 / 大舅' : '姻姐 / 弟媳 / 姑婦 / 小姑 / 大姨';
+                    callEn = 'Sibling-in-law / Spouse\'s Sibling';
+                    recipZh = '姻親平輩 / 弟婿 / 妹媳';
+                    recipEn = 'Sibling-in-law';
                 } else {
                     callZh = targetGender === 'M' ? '堂/表兄弟 / 兄 / 弟' : '堂/表姐妹 / 姐 / 妹';
                     callEn = 'Cousin / Brother / Sister';
@@ -526,19 +543,30 @@
                     recipEn = 'Cousin / Sibling';
                 }
             } else if (genDelta === -1) {
-                callZh = isMarriageLinked ? (targetGender === 'M' ? '子婿 / 兒婿 / 姪子婿 / 家屬' : '女媳 / 姪女媳 / 家屬') : (targetGender === 'M' ? '兒子 / 姪子 / 外甥' : '女兒 / 姪女 / 外甥女');
+                callZh = isMarriageLinked ? (targetGender === 'M' ? '子婿 / 兒婿 / 姪婿' : '女媳 / 姪媳') : (targetGender === 'M' ? '兒子 / 姪子 / 外甥' : '女兒 / 姪女 / 外甥女');
                 callEn = targetGender === 'M' ? 'Son / Nephew / Son-in-law' : 'Daughter / Niece / Daughter-in-law';
-                recipZh = '長輩 / 伯叔姑舅姨 / 岳父母 / 家屬';
-                recipEn = 'Parent / Aunt / Uncle / Parent-in-law';
+                recipZh = userGender === 'M' ? '父親 / 伯叔 / 舅舅' : (userGender === 'F' ? '母親 / 姑姑 / 阿姨' : '長輩');
+                recipEn = 'Parent / Aunt / Uncle';
             } else {
-                callZh = isMarriageLinked ? (targetGender === 'M' ? '孫子婿 / 甥孫婿 / 家屬' : '孫女媳 / 甥孫媳 / 家屬') : (targetGender === 'M' ? '孫子 / 外孫 / 姪孫' : '孫女 / 外孫女 / 姪孫女');
+                callZh = isMarriageLinked ? '孫輩姻親 / 家屬晚輩' : (targetGender === 'M' ? '孫子 / 外孫 / 姪孫' : '孫女 / 外孫女 / 姪孫女');
                 callEn = targetGender === 'M' ? 'Grandson / Great-Nephew' : 'Granddaughter / Great-Niece';
-                recipZh = '祖輩 / 祖岳父母 / 舅丈公 / 家屬';
-                recipEn = 'Grandparent / Great-Uncle';
+                recipZh = '祖輩 / 祖岳父母';
+                recipEn = 'Grandparent';
             }
 
-            let estimatedDna = isMarriageLinked ? 0 : Math.pow(0.5, Math.max(chain.length, 1));
-            let dnaStr = isMarriageLinked ? "0% (姻親無直系血緣)" : `${(estimatedDna * 100).toFixed(2)}%`;
+            // 精準血緣基因近似度算法 (Full Siblings 50%, Cousin 12.5%, etc.)
+            let estimatedDna = 0;
+            if (!isMarriageLinked) {
+                if (chain.length === 1 && ['ELDER_BRO', 'YOUNGER_BRO', 'ELDER_SIS', 'YOUNGER_SIS'].includes(chain[0])) {
+                    estimatedDna = 0.50; // 全胞手足為 50%
+                } else {
+                    estimatedDna = Math.pow(0.5, directAncestryDegree);
+                }
+            }
+
+            const dnaStr = isMarriageLinked 
+                ? "0% (姻親無直系基因)" 
+                : `${(estimatedDna * 100).toFixed(2)}% (直系/旁系血緣)`;
 
             return {
                 callZh: callZh,
@@ -547,24 +575,25 @@
                 recipEn: recipEn,
                 dna: dnaStr,
                 dnaBar: estimatedDna * 100,
-                expZh: `這是一條相隔 ${chain.length} 個節點的親屬關係。${neutralDistantNote}`,
-                expEn: `Extended relationship spanning ${chain.length} links. ${neutralDistantNote}`
+                expZh: `此親屬關係相隔 ${chain.length} 個節點。若在同志家庭中涉收養或無基因連結之人工生殖（ART/RIVF/代孕），生物學基因近似度為 0%，但法律與情感親權 100% 完全平等。`,
+                expEn: `Spans ${chain.length} kinship links. In adoption or ART non-genetic parenting, biological similarity is 0%, while legal and emotional parenthood remains 100% equal.`
             };
         }
 
-        // 初始化與 UI 事件 Binding
         document.addEventListener('DOMContentLoaded', () => {
             initEventListeners();
             updateUIByLang();
         });
 
         function initEventListeners() {
+            // Language switch toggle
             document.getElementById('lang-toggle-btn').addEventListener('click', () => {
                 state.lang = state.lang === 'zh' ? 'en' : 'zh';
                 updateUIByLang();
                 if (state.chain.length > 0) calculateKinship();
             });
 
+            // Gender selector buttons
             document.querySelectorAll('.gender-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     document.querySelectorAll('.gender-btn').forEach(b => {
@@ -580,6 +609,7 @@
                 });
             });
 
+            // Relationship status buttons
             document.querySelectorAll('.status-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     document.querySelectorAll('.status-btn').forEach(b => {
@@ -595,6 +625,7 @@
                 });
             });
 
+            // Kinship keypad buttons
             document.querySelectorAll('.rel-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const rel = e.currentTarget.getAttribute('data-rel');
@@ -603,12 +634,14 @@
                 });
             });
 
+            // AC Clear all
             document.getElementById('btn-ac').addEventListener('click', () => {
                 state.chain = [];
                 renderChainDisplay();
                 resetResultDisplay();
             });
 
+            // Delete last node
             document.getElementById('btn-del').addEventListener('click', () => {
                 state.chain.pop();
                 renderChainDisplay();
@@ -619,12 +652,14 @@
                 }
             });
 
+            // Compute button
             document.getElementById('btn-calc').addEventListener('click', () => {
                 if (state.chain.length === 0) return;
                 calculateKinship();
             });
         }
 
+        // Language text renderer
         function updateUIByLang() {
             const t = i18n[state.lang];
             document.getElementById('app-title').innerText = t.appTitle;
@@ -644,6 +679,7 @@
             renderChainDisplay();
         }
 
+        // Render key input chain tags
         function renderChainDisplay() {
             const container = document.getElementById('chain-display');
             const countElem = document.getElementById('chain-count');
@@ -667,6 +703,7 @@
             container.innerHTML = html;
         }
 
+        // Compute and display UI results
         function calculateKinship() {
             document.getElementById('result-placeholder').classList.add('hidden');
             document.getElementById('result-content').classList.remove('hidden');
@@ -688,6 +725,7 @@
             }
         }
 
+        // Reset display card
         function resetResultDisplay() {
             document.getElementById('result-placeholder').classList.remove('hidden');
             document.getElementById('result-content').classList.add('hidden');
