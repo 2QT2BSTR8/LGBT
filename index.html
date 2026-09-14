@@ -362,10 +362,8 @@
 
             let chain = [...rawChain];
             const chainStr = chain.join('->');
-            const genderDiversityNote = "依個人喜好，有人選擇運用中性或性向流動之詞彙，亦有人注入傳統男女稱謂於同性婚姻關係中。";
 
             // 1. 特殊關係簡化處理 (Self & Direct Partner Edge Cases)
-            // 父/母 -> 子/女 => 手足或自己
             if (['FATHER->SON', 'MOTHER->SON', 'FATHER->DAUGHTER', 'MOTHER->DAUGHTER'].includes(chainStr)) {
                 const targetGender = (chain[1] === 'SON') ? 'M' : 'F';
                 const callZhStr = targetGender === 'M' ? "兄弟 / 手足 / 自己" : "姊妹 / 手足 / 自己";
@@ -374,16 +372,15 @@
                     callZh: callZhStr, callEn: callEnStr,
                     recipZh: userGender === 'M' ? "兄弟 / 手足" : (userGender === 'F' ? "姊妹 / 手足" : "手足"),
                     recipEn: "Sibling / Self",
-                    dna: "50% ~ 100% (全胞手足 50% / 自己 100%)", dnaBar: 50,
-                    expZh: "此關係鏈代表父母的孩子，即為您的手足（兄弟姊妹）或您自己。",
-                    expEn: "This chain refers to your parent's child, which means your sibling or yourself."
+                    dna: "50% ~ 100% ($r = 0.50 \\sim 1.00$)", dnaBar: 50,
+                    expZh: "此關係鏈代表父母的孩子，即為您的手足（全胞兄弟姊妹 $r = 50\\%$）或您自己（$r = 100\\%$）。遺傳學上同父母手足共享約 50% 染色體重複度。",
+                    expEn: "This chain refers to your parent's child, meaning your full sibling ($r = 50\\%$) or yourself ($r = 100\\%$)."
                 };
             }
 
-            // 2. 純配偶 / 伴侶鏈判定 (Partner & Spouse Chains)
+            // 2. 純配偶 / 伴侶鏈判定 (Pure Partner & Spouse Chains)
             const isPurePartnerChain = chain.every(item => ['HUSBAND', 'WIFE', 'PARTNER'].includes(item));
             if (isPurePartnerChain) {
-                // 若只按下單一配偶，或多次重複配偶
                 let targetGender = 'NB';
                 const lastItem = chain[chain.length - 1];
                 if (lastItem === 'HUSBAND') targetGender = 'M';
@@ -395,76 +392,112 @@
 
                 if (targetGender === 'M' || (userGender === 'M' && userStatus === 'SAME_SEX')) {
                     return {
-                        callZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 配偶",
+                        callZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 寶貝 / 配偶",
                         callEn: "Husband / Partner / Spouse / Significant Other",
-                        recipZh: userGender === 'M' ? "丈夫 / 伴侶 / 愛人 / 另一半 / 老公" : (userGender === 'F' ? "太太 / 妻子 / 伴侶" : "伴侶 / 配偶"),
-                        recipEn: "Husband / Partner / Spouse",
-                        dna: "0% (姻親親權關係)", dnaBar: 0,
-                        expZh: `同性/跨性別伴侶之稱謂。${genderDiversityNote}`,
-                        expEn: "Terms for male same-sex partners and spouses. " + genderDiversityNote
+                        recipZh: "丈夫 / 伴侶 / 愛人 / 另一半 / 老公 / 寶貝 / 配偶",
+                        recipEn: "Husband / Partner / Spouse / Significant Other",
+                        dna: "0% (無血緣關係 / $r = 0$)", dnaBar: 0,
+                        expZh: "同性伴侶（男男配偶）之稱謂。依個人喜好，有人刻意運用多元性別或性向的詞彙以強調理性性別平等及主觀性向流動，亦有人刻意注入男或女的稱呼於同性關係中較剛陽或柔弱的一方。［遺傳學與人類學視角］親屬係數（Coefficient of Relationship, $r = 0$）；姻親係出法律與情感紐帶，雖不具基因重複度，但在社群結構中具同等之社會演化與法律保護效益。",
+                        expEn: "Terms for male same-sex partners and spouses. Genetic coefficient of relationship $r = 0$. While sharing no direct biological DNA overlap, affinity kinship forms vital social and emotional bonds."
                     };
                 } else if (targetGender === 'F' || (userGender === 'F' && userStatus === 'SAME_SEX')) {
                     return {
-                        callZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 配偶",
+                        callZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 寶貝 / 配偶",
                         callEn: "Wife / Partner / Spouse / Significant Other",
-                        recipZh: userGender === 'F' ? "太太 / 伴侶 / 愛人 / 另一半 / 老婆" : (userGender === 'M' ? "丈夫 / 配偶" : "伴侶 / 配偶"),
-                        recipEn: "Wife / Partner / Spouse",
-                        dna: "0% (姻親親權關係)", dnaBar: 0,
-                        expZh: `同性/跨性別伴侶（女性/女女配偶）之稱謂。${genderDiversityNote}`,
-                        expEn: "Terms for female same-sex partners and spouses. " + genderDiversityNote
+                        recipZh: "太太 / 伴侶 / 愛人 / 另一半 / 老婆 / 寶貝 / 配偶",
+                        recipEn: "Wife / Partner / Spouse / Significant Other",
+                        dna: "0% (無血緣關係 / $r = 0$)", dnaBar: 0,
+                        expZh: "同性伴侶（女女配偶）之稱謂。依個人喜好，有人刻意運用多元性別或性向的詞彙以強調理性性別平等及主觀性向流動，亦有人刻意注入男或女的稱呼於同性關係中較剛陽或柔弱的一方。［遺傳學與人類學視角］親屬係數（Coefficient of Relationship, $r = 0$）；姻親係出法律與情感紐帶，雖不具基因重複度，但在社群結構中具同等之社會演化與法律保護效益。",
+                        expEn: "Terms for female same-sex partners and spouses. Genetic coefficient of relationship $r = 0$. While sharing no direct biological DNA overlap, affinity kinship forms vital social and emotional bonds."
                     };
                 } else {
                     return {
                         callZh: "伴侶 / 愛人 / 另一半 / 寶貝 / 配偶",
                         callEn: "Partner / Spouse / Significant Other",
-                        recipZh: "伴侶 / 愛人 / 另一半 / 配偶",
+                        recipZh: "伴侶 / 愛人 / 另一半 / 寶貝 / 配偶",
                         recipEn: "Partner / Spouse / Significant Other",
-                        dna: "0% (姻親親權關係)", dnaBar: 0,
-                        expZh: `多元性別與中性包容稱謂。${genderDiversityNote}`,
-                        expEn: "Gender-neutral inclusive terms for partner and spouse."
+                        dna: "0% (無血緣關係 / $r = 0$)", dnaBar: 0,
+                        expZh: "多元性別與性向包容稱謂。依個人喜好，有人刻意運用多元性別或性向的詞彙以強調理性性別平等及主觀性向流動。［遺傳學與人類學視角］親屬係數 $r = 0$。",
+                        expEn: "Gender-neutral inclusive terms for partner and spouse. Genetic coefficient of relationship $r = 0$."
                     };
                 }
             }
 
-            // 3. 特殊同性婚姻 / 姻親對照矩陣 (具備動態 userGender 對應)
+            // 3. 特殊同性婚姻 / 疏離親屬精確對照矩陣
             if (chainStr === 'HUSBAND->YOUNGER_SIS') {
-                const recipZh = (userGender === 'M') ? '兄夫 / 哥 / 兄長配偶' : (userGender === 'F' ? '嫂嫂 / 大嫂 / 姊妹配偶' : '手足配偶');
-                const recipEn = (userGender === 'M') ? 'Brother-in-law (Brother\'s Husband)' : 'Sister-in-law (Sister\'s Wife)';
                 return {
                     callZh: '小姑 / 夫妹 / 妹子', callEn: 'Sister-in-law (Husband\'s Sister)',
-                    recipZh: recipZh, recipEn: recipEn,
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '丈夫的妹妹可稱呼為「小姑」或「妹子」。對方稱呼您為兄長/姊妹之配偶。',
-                    expEn: 'Your husband\'s sister is your Sister-in-law.'
+                    recipZh: '兄夫 / 哥 / 姐夫', recipEn: 'Brother-in-law (Brother\'s Husband)',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '在同性婚姻中，丈夫的妹妹可稱呼為「小姑」或「妹子」。對方稱呼您（哥哥的同性配偶）為「兄夫」或隨丈夫稱呼「哥 / Brother-in-law」。［人類學標記］屬二等姻親（2nd Degree Affinity），親屬係數 $r = 0$。',
+                    expEn: 'Your husband\'s sister is your Sister-in-law. She calls you Brother-in-law (Brother\'s Husband). Affinity coefficient $r = 0$.'
+                };
+            }
+
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->HUSBAND') {
+                return {
+                    callZh: '妹夫 / 小叔爺', callEn: 'Brother-in-law (Husband\'s Sister\'s Husband)',
+                    recipZh: '內兄 / 妻兄 / 哥', recipEn: 'Brother-in-law',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '丈夫的妹夫可稱為「妹夫」。對方稱呼您為「內兄 / 妻兄 / 哥」。［人類學標記］雙重姻親（Double Affinity Link），親屬係數 $r = 0$。',
+                    expEn: 'Your husband\'s sister\'s husband is called Brother-in-law. Double affinity link ($r = 0$).'
+                };
+            }
+
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON') {
+                return {
+                    callZh: '外甥 / 姑甥', callEn: 'Nephew (Husband\'s Sister\'s Son)',
+                    recipZh: '舅丈 / 舅公 / 舅爸', recipEn: 'Uncle-in-law',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的兒子屬於您的「外甥/姑甥」。對方稱呼您（母親哥哥的同性配偶）為「舅丈」或隨配偶親切稱呼「舅舅/舅爸」。［遺傳學標記］雖然配偶與外甥有 $r = 25\\%$ 之血緣，但您作為姻親配偶之親屬係數為 $r = 0$。',
+                    expEn: 'Your husband\'s sister\'s son is your Nephew. He calls you Uncle-in-law. Affinity link ($r = 0$).'
+                };
+            }
+
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->DAUGHTER->SON') {
+                return {
+                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
+                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的外孫（女兒的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」或「舅頭公」。［人類學標記］隔代姻親，親屬係數 $r = 0$。',
+                    expEn: 'Your husband\'s sister\'s granddaughter\'s son is your Great-Nephew. He calls you Great-Uncle-in-law ($r = 0$).'
+                };
+            }
+
+            if (chainStr === 'HUSBAND->YOUNGER_SIS->SON->SON') {
+                return {
+                    callZh: '外甥孫 / 姑甥孫', callEn: 'Great-Nephew (Husband\'s Sister\'s Grandson)',
+                    recipZh: '舅頭公 / 舅丈公 / 舅爺', recipEn: 'Great-Uncle-in-law',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '丈夫的妹妹的內孫（兒子的兒子），稱為「外甥孫」。對方稱呼您為「舅丈公」。［人類學標記］隔代姻親，親屬係數 $r = 0$。',
+                    expEn: 'Your husband\'s sister\'s son\'s son is your Great-Nephew. He calls you Great-Uncle-in-law ($r = 0$).'
                 };
             }
 
             if (chainStr === 'WIFE->ELDER_BRO->HUSBAND') {
-                const recipZh = (userGender === 'M') ? '妹婿 / 妹夫' : (userGender === 'F' ? '妹婦 / 小姑' : '妹手足配偶');
                 return {
-                    callZh: '大舅夫 / 大舅哥配偶', callEn: 'Brother-in-law (Wife\'s Brother\'s Husband)',
-                    recipZh: recipZh, recipEn: 'Sibling-in-law',
-                    dna: '0% (姻親)', dnaBar: 0,
-                    expZh: '妻子的哥哥的同性配偶稱為「大舅夫」。對方稱呼您為妹婿/妹婦。',
-                    expEn: 'Your wife\'s elder brother\'s husband is called Brother-in-law.'
+                    callZh: '大舅夫', callEn: 'Brother-in-law (Wife\'s Brother\'s Husband)',
+                    recipZh: '妹婿 / 妹夫 / 妹婦', recipEn: 'Sibling-in-law',
+                    dna: '0% (姻親 / $r = 0$)', dnaBar: 0,
+                    expZh: '妻子的哥哥的丈夫稱為「大舅夫」。對方稱呼您為「妹婿/妹夫/妹婦」。［人類學標記］同性婚姻拓展姻親稱謂，親屬係數 $r = 0$。',
+                    expEn: 'Your wife\'s elder brother\'s husband is called Brother-in-law (大舅夫). Affinity link ($r = 0$).'
                 };
             }
 
             if (chainStr === 'MOTHER->YOUNGER_SIS->SON->SON') {
-                const recipZh = (userGender === 'M') ? '表伯父 / 表叔父' : (userGender === 'F' ? '表姑母 / 表姨母' : '表親長輩');
                 return {
                     callZh: '表姪子 / 表姪', callEn: '1st Cousin Once Removed (Cousin\'s Son)',
-                    recipZh: recipZh, recipEn: 'Cousin-Uncle / Cousin-Aunt',
-                    dna: '6.25% (直系基因血緣)', dnaBar: 6.25,
-                    expZh: '母親妹妹的兒子（表兄弟）的兒子，屬於表姪。生物學基因相似度約 6.25%。若為同志家庭收養或無基因連結，基因近似度為 0%，親權關係不變。',
-                    expEn: 'Your mother\'s sister\'s son\'s son is your 1st Cousin Once Removed. Genetic similarity ~6.25%.'
+                    recipZh: '表姑丈 / 表叔丈 (若稱呼您丈夫) / 表伯叔', recipEn: 'Cousin-Uncle / Uncle-in-law',
+                    dna: '6.25% ($r = 0.0625$)', dnaBar: 6.25,
+                    expZh: '媽媽的妹妹（姨媽）的兒子（表兄弟）的兒子，稱為「表姪」。英文為 1st Cousin Once Removed。［遺傳學與數學解析］親屬係數公式 $r = (1/2)^4 = 6.25\\%$。若對方稱呼您的同性配偶，傳統可稱「表姑丈/表叔丈」。',
+                    expEn: 'Your mother\'s sister\'s son\'s son is your 1st Cousin Once Removed. Genetic coefficient $r = (1/2)^4 = 6.25\\%$.'
                 };
             }
 
-            // 4. 通用世代與基因相似度計算引擎
+            // 4. 通用世代與基因距離動態計算 Engine
             let genDelta = 0;
             let isMarriageLinked = false;
-            let directAncestryDegree = 0; // 計算旁系血親距離
+            let biologicalLinks = 0;
 
             const nodeGenderMap = {
                 FATHER: 'M', MOTHER: 'F', HUSBAND: 'M', WIFE: 'F',
@@ -472,70 +505,53 @@
                 SON: 'M', DAUGHTER: 'F', PARTNER: 'NB'
             };
 
-            let lastGender = 'M';
             chain.forEach(node => {
-                if (['FATHER', 'MOTHER'].includes(node)) { genDelta += 1; directAncestryDegree += 1; }
-                if (['SON', 'DAUGHTER'].includes(node)) { genDelta -= 1; directAncestryDegree += 1; }
-                if (['ELDER_BRO', 'YOUNGER_BRO', 'ELDER_SIS', 'YOUNGER_SIS'].includes(node)) { directAncestryDegree += 1; }
-                if (['HUSBAND', 'WIFE', 'PARTNER'].includes(node)) { isMarriageLinked = true; }
-                lastGender = nodeGenderMap[node] || 'M';
+                if (['FATHER', 'MOTHER'].includes(node)) { genDelta += 1; biologicalLinks += 1; }
+                if (['SON', 'DAUGHTER'].includes(node)) { genDelta -= 1; biologicalLinks += 1; }
+                if (['ELDER_BRO', 'YOUNGER_BRO', 'ELDER_SIS', 'YOUNGER_SIS'].includes(node)) { biologicalLinks += 1; }
+                if (['HUSBAND', 'WIFE', 'PARTNER'].includes(node)) isMarriageLinked = true;
             });
 
+            const lastGender = nodeGenderMap[chain[chain.length - 1]] || 'M';
             const targetGender = lastGender;
 
-            // 廣義遠親判定
-            if (chain.length >= 4 && isMarriageLinked) {
-                return {
-                    callZh: "家屬 / 家人 / 姻親家人",
-                    callEn: "Family Member / Extended In-law",
-                    recipZh: "家屬 / 家人 / 姻親家人",
-                    recipEn: "Family Member / Extended In-law",
-                    dna: "0% (姻親遠親)", dnaBar: 0,
-                    expZh: `此親屬關係相隔較多層（共 ${chain.length} 個節點）。在傳統稱謂中無固定詞彙，建議直接稱呼姓名或中性暱稱。`,
-                    expEn: `Extended family relationship spanning ${chain.length} links. Recommended to use name or preferred terms.`
-                };
-            }
-
-            let callZh = "";
-            let callEn = "";
-            let recipZh = "";
-            let recipEn = "";
+            let callZh = "", callEn = "", recipZh = "", recipEn = "";
 
             if (genDelta >= 3) {
                 callZh = targetGender === 'M' ? '高祖父 / 曾祖父 / 祖輩長輩' : '高祖母 / 曾祖母 / 祖輩長輩';
                 callEn = targetGender === 'M' ? 'Great-Great Grandfather' : 'Great-Great Grandmother';
-                recipZh = userGender === 'M' ? '玄孫 / 曾孫' : (userGender === 'F' ? '玄孫女 / 曾孫女' : '曾孫輩');
+                recipZh = userGender === 'M' ? '玄孫 / 曾孫' : '玄孫女 / 曾孫女';
                 recipEn = 'Great-Grandchild';
             } else if (genDelta === 2) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '太公 / 祖岳父 / 家屬長輩' : '太婆 / 祖岳母 / 家屬長輩';
-                    callEn = 'Grandparent-in-law / Family Elder';
-                    recipZh = '孫婿 / 孫女媳 / 家屬晚輩';
-                    recipEn = 'Grandchild-in-law';
+                    callZh = targetGender === 'M' ? '太公 / 祖岳父 / 舅丈公 / 伯丈公 / 家屬' : '太婆 / 祖岳母 / 姑姆婆 / 姨妗婆 / 家屬';
+                    callEn = 'Grandparent-in-law / Great-Uncle-in-law / Family';
+                    recipZh = '孫婿 / 孫女媳 / 外甥孫 / 家屬';
+                    recipEn = 'Grandchild-in-law / Great-Niece-Nephew';
                 } else {
                     callZh = targetGender === 'M' ? '爺爺 / 外公 / 祖父' : '奶奶 / 外婆 / 祖母';
                     callEn = targetGender === 'M' ? 'Grandfather' : 'Grandmother';
-                    recipZh = userGender === 'M' ? '孫子 / 外孫' : (userGender === 'F' ? '孫女 / 外孫女' : '孫輩');
+                    recipZh = userGender === 'M' ? '孫子 / 外孫' : '孫女 / 外孫女';
                     recipEn = 'Grandchild';
                 }
             } else if (genDelta === 1) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '岳父 / 公公 / 舅丈 / 伯丈' : '岳母 / 婆婆 / 姨妗 / 姑姆';
+                    callZh = targetGender === 'M' ? '岳父 / 公公 / 舅丈 / 伯丈 / 叔丈 / 家屬' : '岳母 / 婆婆 / 姨妗 / 姑姆 / 姑嬸 / 家屬';
                     callEn = targetGender === 'M' ? 'Father-in-law / Uncle-in-law' : 'Mother-in-law / Aunt-in-law';
-                    recipZh = userGender === 'M' ? '賢婿 / 兒婿 / 姪婿' : (userGender === 'F' ? '賢媳 / 媳婦 / 姪媳' : '晚輩配偶');
-                    recipEn = 'Child-in-law';
+                    recipZh = userGender === 'M' ? '子婿 / 兒婿 / 甥婿 / 姪婿' : '女媳 / 媳婦 / 甥媳';
+                    recipEn = 'Child-in-law / Niece-Nephew-in-law';
                 } else {
-                    callZh = targetGender === 'M' ? '伯父 / 叔父 / 舅舅 / 父親' : '姑姑 / 阿姨 / 伯母 / 母親';
+                    callZh = targetGender === 'M' ? '伯父 / 叔父 / 舅舅 / 父親' : '姑姑 / 阿姨 / 伯母 / 嬸嬸 / 母親';
                     callEn = targetGender === 'M' ? 'Uncle / Father' : 'Aunt / Mother';
-                    recipZh = userGender === 'M' ? '姪子 / 外甥 / 兒子' : (userGender === 'F' ? '姪女 / 外甥女 / 女兒' : '晚輩');
+                    recipZh = userGender === 'M' ? '姪子 / 外甥 / 兒子' : '姪女 / 外甥女 / 女兒';
                     recipEn = 'Niece / Nephew / Child';
                 }
             } else if (genDelta === 0) {
                 if (isMarriageLinked) {
-                    callZh = targetGender === 'M' ? '姻兄 / 妹夫 / 大伯 / 小叔 / 大舅' : '姻姐 / 弟媳 / 姑婦 / 小姑 / 大姨';
-                    callEn = 'Sibling-in-law / Spouse\'s Sibling';
-                    recipZh = '姻親平輩 / 弟婿 / 妹媳';
-                    recipEn = 'Sibling-in-law';
+                    callZh = targetGender === 'M' ? '姻兄 / 妹夫 / 大伯爺 / 小叔爺 / 舅弟夫 / 家屬' : '姻姐 / 弟媳 / 姑奶嫂 / 小姑嬸 / 大姨嫂 / 家屬';
+                    callEn = 'Sibling-in-law / Spouse\'s Sibling / Family';
+                    recipZh = '姻親平輩 / 弟婿 / 妹媳 / 姐嫂 / 家屬';
+                    recipEn = 'Sibling-in-law / Family';
                 } else {
                     callZh = targetGender === 'M' ? '堂/表兄弟 / 兄 / 弟' : '堂/表姐妹 / 姐 / 妹';
                     callEn = 'Cousin / Brother / Sister';
@@ -543,30 +559,19 @@
                     recipEn = 'Cousin / Sibling';
                 }
             } else if (genDelta === -1) {
-                callZh = isMarriageLinked ? (targetGender === 'M' ? '子婿 / 兒婿 / 姪婿' : '女媳 / 姪媳') : (targetGender === 'M' ? '兒子 / 姪子 / 外甥' : '女兒 / 姪女 / 外甥女');
+                callZh = isMarriageLinked ? (targetGender === 'M' ? '子婿 / 兒婿 / 姪子婿 / 家屬' : '女媳 / 姪女媳 / 家屬') : (targetGender === 'M' ? '兒子 / 姪子 / 外甥' : '女兒 / 姪女 / 外甥女');
                 callEn = targetGender === 'M' ? 'Son / Nephew / Son-in-law' : 'Daughter / Niece / Daughter-in-law';
-                recipZh = userGender === 'M' ? '父親 / 伯叔 / 舅舅' : (userGender === 'F' ? '母親 / 姑姑 / 阿姨' : '長輩');
-                recipEn = 'Parent / Aunt / Uncle';
+                recipZh = '長輩 / 伯叔姑舅姨 / 岳父母 / 家屬';
+                recipEn = 'Parent / Aunt / Uncle / Parent-in-law';
             } else {
-                callZh = isMarriageLinked ? '孫輩姻親 / 家屬晚輩' : (targetGender === 'M' ? '孫子 / 外孫 / 姪孫' : '孫女 / 外孫女 / 姪孫女');
+                callZh = isMarriageLinked ? (targetGender === 'M' ? '孫子婿 / 甥孫婿 / 家屬' : '孫女媳 / 甥孫媳 / 家屬') : (targetGender === 'M' ? '孫子 / 外孫 / 姪孫' : '孫女 / 外孫女 / 姪孫女');
                 callEn = targetGender === 'M' ? 'Grandson / Great-Nephew' : 'Granddaughter / Great-Niece';
-                recipZh = '祖輩 / 祖岳父母';
-                recipEn = 'Grandparent';
+                recipZh = '祖輩 / 祖岳父母 / 舅丈公 / 家屬';
+                recipEn = 'Grandparent / Great-Uncle';
             }
 
-            // 精準血緣基因近似度算法 (Full Siblings 50%, Cousin 12.5%, etc.)
-            let estimatedDna = 0;
-            if (!isMarriageLinked) {
-                if (chain.length === 1 && ['ELDER_BRO', 'YOUNGER_BRO', 'ELDER_SIS', 'YOUNGER_SIS'].includes(chain[0])) {
-                    estimatedDna = 0.50; // 全胞手足為 50%
-                } else {
-                    estimatedDna = Math.pow(0.5, directAncestryDegree);
-                }
-            }
-
-            const dnaStr = isMarriageLinked 
-                ? "0% (姻親無直系基因)" 
-                : `${(estimatedDna * 100).toFixed(2)}% (直系/旁系血緣)`;
+            let estimatedDna = isMarriageLinked ? 0 : Math.pow(0.5, Math.max(biologicalLinks, 1));
+            let dnaStr = isMarriageLinked ? "0% (姻親無直系血緣 / $r = 0$)" : `${(estimatedDna * 100).toFixed(2)}% ($r = ${(estimatedDna).toFixed(4)}$)`;
 
             return {
                 callZh: callZh,
@@ -575,8 +580,8 @@
                 recipEn: recipEn,
                 dna: dnaStr,
                 dnaBar: estimatedDna * 100,
-                expZh: `此親屬關係相隔 ${chain.length} 個節點。若在同志家庭中涉收養或無基因連結之人工生殖（ART/RIVF/代孕），生物學基因近似度為 0%，但法律與情感親權 100% 完全平等。`,
-                expEn: `Spans ${chain.length} kinship links. In adoption or ART non-genetic parenting, biological similarity is 0%, while legal and emotional parenthood remains 100% equal.`
+                expZh: `這是一條相隔 ${chain.length} 個節點的親屬關係（世代階差 $\\Delta G = ${genDelta}$）。［遺傳學解析］親屬係數 $r = ${(isMarriageLinked ? 0 : estimatedDna).toFixed(4)}$。建議可以名字、慣用 Pronouns 或中性尊稱親切呼喚。`,
+                expEn: `Extended relationship spanning ${chain.length} links (Gen Delta $\\Delta G = ${genDelta}$). Genetic coefficient $r = ${(isMarriageLinked ? 0 : estimatedDna).toFixed(4)}$.`
             };
         }
 
@@ -586,14 +591,12 @@
         });
 
         function initEventListeners() {
-            // Language switch toggle
             document.getElementById('lang-toggle-btn').addEventListener('click', () => {
                 state.lang = state.lang === 'zh' ? 'en' : 'zh';
                 updateUIByLang();
                 if (state.chain.length > 0) calculateKinship();
             });
 
-            // Gender selector buttons
             document.querySelectorAll('.gender-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     document.querySelectorAll('.gender-btn').forEach(b => {
@@ -609,7 +612,6 @@
                 });
             });
 
-            // Relationship status buttons
             document.querySelectorAll('.status-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     document.querySelectorAll('.status-btn').forEach(b => {
@@ -625,7 +627,6 @@
                 });
             });
 
-            // Kinship keypad buttons
             document.querySelectorAll('.rel-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const rel = e.currentTarget.getAttribute('data-rel');
@@ -634,14 +635,12 @@
                 });
             });
 
-            // AC Clear all
             document.getElementById('btn-ac').addEventListener('click', () => {
                 state.chain = [];
                 renderChainDisplay();
                 resetResultDisplay();
             });
 
-            // Delete last node
             document.getElementById('btn-del').addEventListener('click', () => {
                 state.chain.pop();
                 renderChainDisplay();
@@ -652,14 +651,12 @@
                 }
             });
 
-            // Compute button
             document.getElementById('btn-calc').addEventListener('click', () => {
                 if (state.chain.length === 0) return;
                 calculateKinship();
             });
         }
 
-        // Language text renderer
         function updateUIByLang() {
             const t = i18n[state.lang];
             document.getElementById('app-title').innerText = t.appTitle;
@@ -679,7 +676,6 @@
             renderChainDisplay();
         }
 
-        // Render key input chain tags
         function renderChainDisplay() {
             const container = document.getElementById('chain-display');
             const countElem = document.getElementById('chain-count');
@@ -703,7 +699,6 @@
             container.innerHTML = html;
         }
 
-        // Compute and display UI results
         function calculateKinship() {
             document.getElementById('result-placeholder').classList.add('hidden');
             document.getElementById('result-content').classList.remove('hidden');
@@ -725,7 +720,6 @@
             }
         }
 
-        // Reset display card
         function resetResultDisplay() {
             document.getElementById('result-placeholder').classList.remove('hidden');
             document.getElementById('result-content').classList.add('hidden');
